@@ -41,9 +41,6 @@ const Navbar = () => {
           <div>
             <DarkMode />
           </div>
-          <div>
-            <DarkMode />
-          </div>
         </div>
       </div>
       <div></div>
