@@ -1,32 +1,36 @@
 // import React from "react";
 import Logo from "../../assets/logo.png";
-import { SearchOutlined, ShoppingCartOutlined, CaretDownOutlined } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  ShoppingCartOutlined,
+  CaretDownOutlined,
+} from "@ant-design/icons";
 import { Button, Typography, Input } from "antd";
 import DarkMode from "./DarkMode";
 
 const Menu = [
   {
-    id: 1,
+    id: 122,
     name: "Home",
     link: "/#",
   },
   {
-    id: 2,
+    id: 333,
     name: "Top Rated",
     link: "/#services",
   },
   {
-    id: 3,
+    id: 7,
     name: "Kids Wear",
     link: "/#",
   },
   {
-    id: 3,
+    id: 4,
     name: "Mens Wear",
     link: "/#",
   },
   {
-    id: 3,
+    id: 749649,
     name: "Electronics",
     link: "/#",
   },
@@ -90,43 +94,43 @@ const Navbar = () => {
         </div>
       </div>
       <div>
-      <div data-aos="zoom-in" className="flex justify-center">
-        <ul className="sm:flex hidden items-center gap-4">
-          {Menu.map((data) => (
-            <li key={data.id}>
-              <a
-                href={data.link}
-                className="inline-block px-4 hover:text-primary duration-200"
-              >
-                {data.name}
+        <div data-aos="zoom-in" className="flex justify-center">
+          <ul className="sm:flex hidden items-center gap-4">
+            {Menu.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={item.link}
+                  className="inline-block px-4 hover:text-primary duration-200"
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+            {/* Simple Dropdown and Links */}
+            <li className="group relative cursor-pointer">
+              <a href="#" className="flex items-center gap-[2px] py-2">
+                Trending Products
+                <span>
+                  <CaretDownOutlined className="transition-all duration-200 group-hover:rotate-180" />
+                </span>
               </a>
+              <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
+                <ul>
+                  {DropdownLinks.map((data) => (
+                    <li key={data.id}>
+                      <a
+                        href={data.link}
+                        className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
+                      >
+                        {data.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </li>
-          ))}
-          {/* Simple Dropdown and Links */}
-          <li className="group relative cursor-pointer">
-            <a href="#" className="flex items-center gap-[2px] py-2">
-              Trending Products
-              <span>
-                <CaretDownOutlined  className="transition-all duration-200 group-hover:rotate-180" />
-              </span>
-            </a>
-            <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
-              <ul>
-                {DropdownLinks.map((data) => (
-                  <li key={data.id}>
-                    <a
-                      href={data.link}
-                      className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
-                    >
-                      {data.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
+          </ul>
+        </div>
       </div>
     </div>
   );
