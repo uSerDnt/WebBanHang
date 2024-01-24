@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Typography, Input } from "antd";
 import DarkMode from "./DarkMode";
-
+import React from "react";
 const Menu = [
   {
     id: 122,
