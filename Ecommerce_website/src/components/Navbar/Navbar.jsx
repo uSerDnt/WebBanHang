@@ -191,8 +191,8 @@ const Navbar = ({ handleLoginModal }) => {
             </li>
             <div className="group relative cursor-pointer">
               <Button
-                type="text"
-                className="text-black dark:text-white font-medium"
+                type="link"
+                className="text-black dark:text-white font-medium hover:text-black"
                 onClick={handleClick}
               >
                 Đăng xuất

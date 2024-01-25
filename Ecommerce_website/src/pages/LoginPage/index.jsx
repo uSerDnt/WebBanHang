@@ -9,14 +9,13 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm(); //tui khong biet
   const navigate = useNavigate();
   const [login, setLogin] = useState(true);
 
   const handleLogin = async (values) => {
     try {
       const { username, password, repassword } = values;
-
       if (login) {
         // Sign in
         await signInWithEmailAndPassword(auth, username, password);
@@ -26,9 +25,8 @@ const Login = () => {
         // Sign up
         if (password === repassword) {
           await createUserWithEmailAndPassword(auth, username, password);
-         window.location.reload();
-         setLogin(true);
-         toast.success("Đăng ky thành công");
+          window.location.reload();
+          toast.success("Đăng ky thành công");
         } else {
           toast.error("lỗi sever");
           window.location.reload();
