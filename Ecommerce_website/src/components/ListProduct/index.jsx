@@ -54,7 +54,6 @@ const ListProduct = () => {
   const handleProductDetail = () => {
     navigate("/product");
   };
-  //toi la nguyen
   return (
     <div className="mt-14 mb-12">
       <div className="container">
