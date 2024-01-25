@@ -53,7 +53,23 @@ const DropdownLinks = [
     link: "/#",
   },
 ];
-
+const LoginLinks = [
+  {
+    id: 1,
+    name: "Đăng nhập",
+    link: "/login",
+  },
+  {
+    id: 2,
+    name: "Đăng ký",
+    link: "/#",
+  },
+  {
+    id: 3,
+    name: "Đăng xuất",
+    link: "/#",
+  },
+];
 const Navbar = ({ handleLoginModal }) => {
   return (
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20">
@@ -122,6 +138,29 @@ const Navbar = ({ handleLoginModal }) => {
               <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
                 <ul>
                   {DropdownLinks.map((data) => (
+                    <li key={data.id}>
+                      <a
+                        href={data.link}
+                        className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
+                      >
+                        {data.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+            {/* Login */}
+            <li className="group relative cursor-pointer">
+              <a href="#" className="flex items-center gap-[2px] py-2">
+                Đăng nhập
+                <span>
+                  <CaretDownOutlined className="transition-all duration-200 group-hover:rotate-180" />
+                </span>
+              </a>
+              <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
+                <ul>
+                  {LoginLinks.map((data) => (
                     <li key={data.id}>
                       <a
                         href={data.link}
