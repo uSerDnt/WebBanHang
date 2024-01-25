@@ -8,6 +8,11 @@ import {
 import { Button, Typography, Input } from "antd";
 import DarkMode from "./DarkMode";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../FirebaseConfig";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { signOut } from "firebase/auth";
 const Menu = [
   {
     id: 122,
@@ -64,12 +69,23 @@ const LoginLinks = [
     name: "Đăng ký",
     link: "/#",
   },
-  {
-    id: 3,
-    name: "Đăng xuất",
-    link: "/#",
-  },
+  // {
+  //   id: 3,
+  //   name: "Đăng xuất",
+  //   link: "/#",
+  // },
 ];
+const handleClick = async () => {
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      console.log("Signed out successfully");
+    })
+    .catch((error) => {
+      // An error happened.
+    });
+};
+
 const Navbar = ({ handleLoginModal }) => {
   return (
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20">
@@ -173,6 +189,15 @@ const Navbar = ({ handleLoginModal }) => {
                 </ul>
               </div>
             </li>
+            <div className="group relative cursor-pointer">
+              <Button
+                type="text"
+                className="text-black dark:text-white font-medium"
+                onClick={handleClick}
+              >
+                Đăng xuất
+              </Button>
+            </div>
           </ul>
         </div>
       </div>

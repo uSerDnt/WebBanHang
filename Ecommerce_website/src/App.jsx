@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import AppRoute from "./AppRoute";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   useEffect(() => {
     AOS.init({
@@ -12,7 +14,12 @@ const App = () => {
     });
     AOS.refresh();
   }, []);
-  return <AppRoute />;
+  return (
+    <div>
+      <AppRoute />;
+      <ToastContainer />
+    </div>
+  );
 };
 
 export default App;

@@ -14,6 +14,7 @@ const HomePages = () => {
   const handleLoginModal = () => {
     setOpenLoginModal(!openLoginModal);
   };
+
   return (
     <div>
       <Navbar handleLoginModal={handleLoginModal} />
