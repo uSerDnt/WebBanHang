@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LightButton from "../../assets/light-mode-button.png";
 import DarkButton from "../../assets/dark-mode-button.png";
 
