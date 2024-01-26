@@ -20,14 +20,13 @@ const Banner = () => {
           {/* text details section */}
           <div className="flex flex-col justify-center gap-6 sm:pt-0">
             <h1 data-aos="fade-up" className="text-3xl sm:text-4xl font-bold">
-              Winter Sale upto 50% Off
+            Giảm giá mùa đông lên tới 50%
             </h1>
             <p
               data-aos="fade-up"
               className="text-sm text-gray-500 tracking-wide leading-5"
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque
-              reiciendis inventore iste ratione ex alias quis magni at optio
+              Bản thân khách hàng, khách hàng sẽ có thể theo dõi quá trình đào tạo của khách hàng. Và bằng cách từ chối chúng, bạn đã nghĩ ra một lý do từ một lựa chọn tuyệt vời khác
             </p>
             <div className="flex flex-col gap-4">
               <div data-aos="fade-up" className="flex items-center gap-4">

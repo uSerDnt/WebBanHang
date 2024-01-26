@@ -7,23 +7,23 @@ const ProductsData = [
   {
     id: 1,
     img: Img1,
-    title: "Casual Wear",
+    title: "Mặc giản dị",
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Trang phục là bản ngôn của cá nhân, mỗi đường may là câu chuyện về đẹp và duyên dáng.",
   },
   {
     id: 2,
     img: Img2,
-    title: "Printed shirt",
+    title: "Áo sơ mi in",
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Áo quần không chỉ che phủ, mà còn là nghệ thuật diễn đạt tâm hồn.",
   },
   {
     id: 3,
     img: Img3,
-    title: "Women shirt",
+    title: "Áo sơ mi nữ",
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Mỗi chiếc áo, mỗi đôi giày là dấu ấn độc đáo, tô điểm phong cách riêng.",
   },
 ];
 const TopProducts = () => {
@@ -38,7 +38,7 @@ const TopProducts = () => {
             Sản phẩm top trending ở đây
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-            Shop DNT luôn cung cấp những sản phẩm thời trang hot nhất. Hãy lựa
+            Shop Shopoify luôn cung cấp những sản phẩm thời trang hot nhất. Hãy lựa
             chọn theo phong cách của bạn
           </p>
         </div>

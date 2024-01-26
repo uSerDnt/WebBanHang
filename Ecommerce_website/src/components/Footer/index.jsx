@@ -20,7 +20,7 @@ const BannerImg = {
 
 const FooterLinks = [
   {
-    title: "Home",
+    title: "Trang chủ",
     link: "/#",
   },
   {
@@ -28,7 +28,7 @@ const FooterLinks = [
     link: "/#about",
   },
   {
-    title: "Contact",
+    title: "Liên hệ",
     link: "/#contact",
   },
   {
@@ -46,11 +46,10 @@ const Footer = () => {
           <div className="py-8 px-4">
             <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
               <img src={footerLogo} alt="" className="max-w-[50px]" />
-              Shopsy
+              Shopoify
             </h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum in
-              beatae ea recusandae blanditiis veritatis.
+            Tự tin bước ra thế giới với [Shopoify] - Nơi phong cách gặp sự tự tin.
             </p>
           </div>
 
@@ -59,7 +58,7 @@ const Footer = () => {
             <div>
               <div className="py-8 px-4">
                 <h1 className="sm:text-xl text-xl font-bold sm:text-left text-justify mb-3">
-                  Important Links
+                Liên kết quan trọng
                 </h1>
                 <ul className="flex flex-col gap-3">
                   {FooterLinks.map((link) => (
@@ -76,7 +75,7 @@ const Footer = () => {
             <div>
               <div className="py-8 px-4">
                 <h1 className="sm:text-xl text-xl font-bold sm:text-left text-justify mb-3">
-                  Links
+                  Liên kết
                 </h1>
                 <ul className="flex flex-col gap-3">
                   {FooterLinks.map((link) => (

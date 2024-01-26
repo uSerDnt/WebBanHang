@@ -16,27 +16,27 @@ import { signOut } from "firebase/auth";
 const Menu = [
   {
     id: 122,
-    name: "Home",
+    name: "Trang chủ",
     link: "/#",
   },
   {
     id: 333,
-    name: "Top Rated",
+    name: "Được đánh giá cao nhất",
     link: "/#services",
   },
   {
     id: 7,
-    name: "Kids Wear",
+    name: "Quần áo trẻ em",
     link: "/#",
   },
   {
     id: 4,
-    name: "Mens Wear",
+    name: "Trang phục nam ",
     link: "/#",
   },
   {
     id: 749649,
-    name: "Electronics",
+    name: "điện tử",
     link: "/#",
   },
 ];
@@ -44,17 +44,17 @@ const Menu = [
 const DropdownLinks = [
   {
     id: 1,
-    name: "Trending Products",
+    name: "Sản phẩm thịnh hành",
     link: "/#",
   },
   {
     id: 2,
-    name: "Best Selling",
+    name: "Bán chạy nhất",
     link: "/#",
   },
   {
     id: 3,
-    name: "Top Rated",
+    name: "Được đánh giá cao nhất",
     link: "/#",
   },
 ];
@@ -104,7 +104,7 @@ const Navbar = ({ handleLoginModal }) => {
               <div className="relative group hidden sm:block">
                 <Input
                   type="text"
-                  placeholder="search"
+                  placeholder="Tìm kiếm"
                   className="w-[200px] sm:w-[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary hover:border-primary, dark:border-gray-500 , dark:bg-gray-800 "
                 />
                 <SearchOutlined className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3" />
@@ -146,7 +146,7 @@ const Navbar = ({ handleLoginModal }) => {
             {/* Simple Dropdown and Links */}
             <li className="group relative cursor-pointer">
               <a href="#" className="flex items-center gap-[2px] py-2">
-                Trending Products
+              Sản phẩm thịnh hành
                 <span>
                   <CaretDownOutlined className="transition-all duration-200 group-hover:rotate-180" />
                 </span>

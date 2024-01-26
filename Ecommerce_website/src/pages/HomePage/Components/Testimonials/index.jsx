@@ -4,26 +4,26 @@ import Slider from "react-slick";
 const TestimonialData = [
   {
     id: 1,
-    name: "Victor",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Nuyễn Thành Nguyên",
+    text: "Sản phẩm này thực sự độc đáo và phong cách. Tôi yêu cầu sự sáng tạo trong thiết kế.",
     img: "https://picsum.photos/101/101",
   },
   {
     id: 2,
-    name: "Satya Nadella",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Đoàn Ngọc Trọng",
+    text: "Chất liệu rất chất lượng, cảm giác thoải mái khi sử dụng. Điều này thực sự làm nổi bật trong thế giới thời trang.",
     img: "https://picsum.photos/102/102",
   },
   {
     id: 3,
-    name: "Virat Kohli",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Hồ Tấn Đạt",
+    text: "Mình rất ấn tượng với tích hợp công nghệ trong sản phẩm này. Sự kết hợp hoàn hảo giữa thời trang và tiện ích!",
     img: "https://picsum.photos/104/104",
   },
   {
-    id: 5,
-    name: "Sachin Tendulkar",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    id: 4,
+    name: "Shizuka",
+    text: "Sản phẩm này không chỉ đẹp mắt mà còn rất tiện lợi. Điều này thực sự làm tăng giá trị sử dụng.",
     img: "https://picsum.photos/103/103",
   },
 ];
@@ -73,14 +73,13 @@ const Testimonials = () => {
         {/* header section */}
         <div className="text-center mb-10 max-w-[600px] mx-auto">
           <p data-aos="fade-up" className="text-sm text-primary">
-            What our customers are saying
+          Khách hàng của chúng tôi đang nói gì
           </p>
           <h1 data-aos="fade-up" className="text-3xl font-bold">
-            Testimonials
+          Lời chứng thực
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit
-            asperiores modi Sit asperiores modi
+          Dễ dàng, Tự tin, Phong cách - Trải nghiệm thời trang tuyệt vời tại [Shopoify]
           </p>
         </div>
 

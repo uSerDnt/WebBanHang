@@ -8,21 +8,21 @@ const ImageList = [
   {
     id: 1,
     img: Image1,
-    title: "Upto 50% off on all Men's Wear",
+    title: "Giảm tới 50% tất cả trang phục nam",
     description:
-      "lorem His Life will forever be Changed dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Thời trang là cách diễn đạt chính mình - Tạo nên phong cách của bạn tại [Shopoify]",
   },
   {
     id: 2,
     img: Image2,
-    title: "30% off on all Women's Wear",
+    title: "Giảm giá 30% cho tất cả trang phục nữ",
     description:
-      "Who's there lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Chọn lựa thông minh, mặc đẹp mỗi ngày - [tên shop], phong cách không giới hạn.",
   },
   {
     id: 3,
     img: Image3,
-    title: "70% off on all Products Sale",
+    title: "Giảm giá 70% cho tất cả sản phẩm giảm giá",
     description:
       "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
@@ -79,7 +79,7 @@ const Hero = ({ handleLoginModal }) => {
                       onClick={handleLoginModal}
                       className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full"
                     >
-                      Order Now
+                      đặt hàng ngay
                     </button>
                   </div>
                 </div>

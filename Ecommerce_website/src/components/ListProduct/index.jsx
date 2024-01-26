@@ -10,41 +10,41 @@ const ProductsData = [
   {
     id: 1,
     img: Img1,
-    title: "Women Ethnic",
+    title: "Phụ nữ dân tộc",
     rating: 5.0,
-    color: "white",
+    color: "Trắng",
     aosDelay: "0",
   },
   {
     id: 2,
     img: Img2,
-    title: "Women western",
+    title: "phụ nữ phương Tây",
     rating: 4.5,
-    color: "Red",
+    color: "Đỏ",
     aosDelay: "200",
   },
   {
     id: 3,
     img: Img3,
-    title: "Goggles",
+    title: "Kính bảo hộ",
     rating: 4.7,
-    color: "brown",
+    color: "nâu",
     aosDelay: "400",
   },
   {
     id: 4,
     img: Img4,
-    title: "Printed T-Shirt",
+    title: "Áo thun in",
     rating: 4.4,
-    color: "Yellow",
+    color: "Vàng",
     aosDelay: "600",
   },
   {
     id: 5,
     img: Img2,
-    title: "Fashin T-Shirt",
+    title: "Áo thun thời trang",
     rating: 4.5,
-    color: "Pink",
+    color: "Hồng",
     aosDelay: "800",
   },
 ];
@@ -60,14 +60,13 @@ const ListProduct = () => {
         {/* Header section */}
         <div className="text-center mb-10 max-w-[600px] mx-auto">
           <p data-aos="fade-up" className="text-sm text-primary">
-            Top Selling Products for you
+          Sản phẩm bán chạy nhất dành cho bạn
           </p>
           <h1 data-aos="fade-up" className="text-3xl font-bold">
-            Products
+          Các sản phẩm
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit
-            asperiores modi Sit asperiores modi
+          Thấu hiểu phong cách cá nhân tại [Shopoify] - Đẳng cấp và Sáng tạo.
           </p>
         </div>
         {/* Body section */}
@@ -103,7 +102,7 @@ const ListProduct = () => {
           {/* view all button */}
           <div className="flex justify-center">
             <button className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md">
-              View All Button
+            Xem Tất Cả
             </button>
           </div>
         </div>
