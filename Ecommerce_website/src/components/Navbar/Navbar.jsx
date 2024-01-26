@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Typography, Input } from "antd";
 import DarkMode from "./DarkMode";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../FirebaseConfig";
 import { ToastContainer, toast } from "react-toastify";
@@ -75,18 +75,37 @@ const LoginLinks = [
   //   link: "/#",
   // },
 ];
-const handleClick = async () => {
-  signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-      console.log("Signed out successfully");
-    })
-    .catch((error) => {
-      // An error happened.
-    });
-};
 
 const Navbar = ({ handleLoginModal }) => {
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // User is logged in
+        setUser(authUser);
+      } else {
+        // User is logged out
+        setUser(null);
+      }
+    });
+
+    return () => {
+      // Cleanup the subscription when the component unmounts
+      unsubscribe();
+    };
+  }, []);
+  console.log("user", user);
+  const handleClick = async () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("Signed out successfully");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   return (
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20">
       {/* upper Navbar */}
@@ -127,6 +146,8 @@ const Navbar = ({ handleLoginModal }) => {
             <div>
               <DarkMode />
             </div>
+            {/* thong tin user */}
+            <div>Hello {user?.email}</div>
           </div>
         </div>
       </div>
@@ -146,7 +167,7 @@ const Navbar = ({ handleLoginModal }) => {
             {/* Simple Dropdown and Links */}
             <li className="group relative cursor-pointer">
               <a href="#" className="flex items-center gap-[2px] py-2">
-              Sản phẩm thịnh hành
+                Sản phẩm thịnh hành
                 <span>
                   <CaretDownOutlined className="transition-all duration-200 group-hover:rotate-180" />
                 </span>

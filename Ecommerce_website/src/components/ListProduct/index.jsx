@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Img1 from "../../assets/women.png";
 import Img2 from "../../assets/women2.jpg";
 import Img3 from "../../assets/women3.jpg";
 import Img4 from "../../assets/women4.jpg";
 import { StarFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../../../FirebaseConfig";
 const ProductsData = [
   {
     id: 1,
@@ -54,19 +55,43 @@ const ListProduct = () => {
   const handleProductDetail = () => {
     navigate("/product");
   };
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Get a snapshot of the "products" collection
+        const querySnapshot = await getDocs(collection(firestore, "Products"));
+
+        // Extract product data from the snapshot
+        const productsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error fetching products: ", error);
+      }
+    };
+
+    // Fetch products when the component mounts
+    fetchProducts();
+  }, []);
+  console.log("products", products);
   return (
     <div className="mt-14 mb-12">
       <div className="container">
         {/* Header section */}
         <div className="text-center mb-10 max-w-[600px] mx-auto">
           <p data-aos="fade-up" className="text-sm text-primary">
-          Sản phẩm bán chạy nhất dành cho bạn
+            Sản phẩm bán chạy nhất dành cho bạn
           </p>
           <h1 data-aos="fade-up" className="text-3xl font-bold">
-          Các sản phẩm
+            Các sản phẩm
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-          Thấu hiểu phong cách cá nhân tại [Shopoify] - Đẳng cấp và Sáng tạo.
+            Thấu hiểu phong cách cá nhân tại [Shopoify] - Đẳng cấp và Sáng tạo.
           </p>
         </div>
         {/* Body section */}
@@ -102,7 +127,7 @@ const ListProduct = () => {
           {/* view all button */}
           <div className="flex justify-center">
             <button className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md">
-            Xem Tất Cả
+              Xem Tất Cả
             </button>
           </div>
         </div>
