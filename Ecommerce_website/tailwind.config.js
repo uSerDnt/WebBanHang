@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#fea928",
+        primary: "#facc15",
         secondary: "#ed8900",
       },
       container: {

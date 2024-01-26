@@ -1,7 +1,18 @@
-import React from "react";
-// Make sure to replace 'COVER_IMAGE' and 'path/to/your/image' with your actual image path or import
 import loginImg from "../../assets/login.jpg";
-import GOOGLE_ICON from "../../assets/google.png"
+import GOOGLE_ICON from "../../assets/google.png";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../FirebaseConfig";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Form, Input, Checkbox, Button } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 const colors = {
   primary: "#e06666",
   background: "#f5f5f5",
@@ -9,6 +20,51 @@ const colors = {
 };
 
 const Login = () => {
+  const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const [login, setLogin] = useState(true);
+
+  const handleLogin = async (values) => {
+    try {
+      const { username, password, repassword } = values;
+
+      if (login) {
+        // Sign in
+        await signInWithEmailAndPassword(auth, username, password);
+        navigate("/");
+        toast.success("Đăng nhập thành công");
+      } else {
+        // Sign up
+        if (password === repassword) {
+          await createUserWithEmailAndPassword(auth, username, password);
+          window.location.reload();
+          toast.success("Đăng ky thành công");
+        } else {
+          toast.error("lỗi sever");
+          window.location.reload();
+          // Handle password mismatch error
+        }
+      }
+    } catch (error) {
+      console.error("Authentication Error:", error.message);
+      // Handle authentication errors (e.g., display error message)
+    }
+  };
+  const handleLoginGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+
+      // Access the user information from the result
+      const user = result.user;
+      navigate("/");
+      // You can use the user information as needed
+      toast.success("Google Sign-In Successful", user);
+    } catch (error) {
+      toast.error("Google Sign-In Error:", error.message);
+      // Handle Google Sign-In errors (e.g., display an error message)
+    }
+  };
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">
@@ -30,58 +86,92 @@ const Login = () => {
 
         <div className="w-full flex flex-col max-w-[500px]">
           <div className="w-full flex flex-col mb-2">
-            <h3 className="text-3xl font-semibold mb-2">Đăng Nhập</h3>
+            <h3 className="text-3xl font-semibold mb-2">Đăng nhập</h3>
             <p className="text-base mb-2">
               Welcome Back! Please enter your details.
             </p>
           </div>
 
-          <div className=" w-full flex-col">
-            <input
-              type="email"
-              placeholder="Email"
-              className=" w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
-            />
+          <Form
+            name="loginForm"
+            onFinish={handleLogin}
+            className="w-full"
+            initialValues={{ remember: true }}
+          >
+            <Form.Item
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your username!",
+                },
+              ]}
+            >
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="Username"
+              />
+            </Form.Item>
 
-            <input
-              type="password"
-              placeholder="Password"
-              className=" w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
-            />
-          </div>
-          <div className="w-full flex items-center justify-between">
-            <div className="w-full flex items-center">
-              <input type="checkbox" className="w-4 h-4 mr-2" />
-              <p className="text-sm">Remember me for 30 days</p>
-            </div>
-            <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
-              Forgot Password ?
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <div className="w-full flex items-center justify-between">
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox>Remember me for 30 days</Checkbox>
+                </Form.Item>
+                <a className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
+                  Forgot Password?
+                </a>
+              </div>
+            </Form.Item>
+
+            <Form.Item>
+              <div className="w-full my-[-20px]">
+                <Button
+                  type="default"
+                  htmlType="submit"
+                  className="h-full w-full text-[#060606] my-2 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer hover:bg-primary"
+                >
+                  Log in
+                </Button>
+                <Button
+                  type="default"
+                  className="h-full w-full text-[#060606] my-2 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer hover:bg-primary hover:text-white"
+                >
+                  Register
+                </Button>
+              </div>
+            </Form.Item>
+          </Form>
+          <div className="w-full flex items-center justify-center relative py-2">
+            <div className="w-full h-[1px] bg-black/40"></div>
+            <p className="text-lg absolute text-black/80 bg-[#f5f5f5] px-2">
+              or
             </p>
           </div>
-
-          <div className="w-full my-4">
-            <div className="my-2">
-              <button className="w-full text-white font-semibold bg-[#060606] rounded-md p-4 text-center cursor-pointer">
-                Log in
-              </button>
-            </div>
-            <div className="my-2">
-              <button className="w-full text-[#060606] font-semibold bg-white border border-black rounded-md p-4 text-center cursor-pointer">
-                Register
-              </button>
-            </div>
-          </div>
-
-          <div className="w-full flex items-center justify-center relative py-2">
-              <div className="w-full h-[1px] bg-black/40"></div>
-              <p className="text-lg absolute text-black/80 bg-[#f5f5f5] px-2">
-                or
-              </p>
-            </div>
-            <div className="w-full text-[#060606] my-2 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer">      
-             <img src={GOOGLE_ICON} className="h-6 mr-2" />
-             Sign In With Google
-            </div>
+          <Button
+            type="default"
+            onClick={handleLoginGoogle}
+            className="h-full w-full text-[#060606] my-2 font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer"
+          >
+            <img src={GOOGLE_ICON} className="h-6 mr-2" />
+            Sign In With Google
+          </Button>
         </div>
 
         <div className="w-full flex items-center justify-center">
@@ -98,9 +188,6 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
 
 // import React, { useState } from "react";
 // import { Input, Button, Form } from "antd";

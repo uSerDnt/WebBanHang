@@ -58,25 +58,25 @@ const DropdownLinks = [
     link: "/#",
   },
 ];
-const LoginLinks = [
-  {
-    id: 1,
-    name: "Đăng nhập",
-    link: "/login",
-  },
-  {
-    id: 2,
-    name: "Đăng ký",
-    link: "/#",
-  },
-  // {
-  //   id: 3,
-  //   name: "Đăng xuất",
-  //   link: "/#",
-  // },
-];
 
 const Navbar = ({ handleLoginModal }) => {
+  const LoginLinks = [
+    {
+      id: 1,
+      name: "Đăng nhập",
+      link: "/login",
+    },
+    {
+      id: 2,
+      name: "Đăng ký",
+      link: "/#",
+    },
+    // {
+    //   id: 3,
+    //   name: "Đăng xuất",
+    //   link: "/#",
+    // },
+  ];
   const [user, setUser] = useState("");
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -147,7 +147,44 @@ const Navbar = ({ handleLoginModal }) => {
               <DarkMode />
             </div>
             {/* thong tin user */}
-            <div>Hello {user?.email}</div>
+            <div>
+              Hello {user?.displayName ? user?.displayName : user?.email}
+            </div>
+            {/* Login */}
+            {user ? (
+              <div className="group relative cursor-pointer">
+                <Button
+                  type="link"
+                  className="text-black dark:text-white font-medium hover:text-black"
+                  onClick={handleClick}
+                >
+                  Đăng xuất
+                </Button>
+              </div>
+            ) : (
+              <div className="group relative cursor-pointer">
+                <a href="#" className="flex items-center gap-[2px] py-2">
+                  Đăng nhập
+                  <span>
+                    <CaretDownOutlined className="transition-all duration-200 group-hover:rotate-180" />
+                  </span>
+                </a>
+                <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
+                  <ul>
+                    {LoginLinks?.map((data) => (
+                      <li key={data.id}>
+                        <a
+                          href={data.link}
+                          className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
+                        >
+                          {data.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -187,38 +224,6 @@ const Navbar = ({ handleLoginModal }) => {
                 </ul>
               </div>
             </li>
-            {/* Login */}
-            <li className="group relative cursor-pointer">
-              <a href="#" className="flex items-center gap-[2px] py-2">
-                Đăng nhập
-                <span>
-                  <CaretDownOutlined className="transition-all duration-200 group-hover:rotate-180" />
-                </span>
-              </a>
-              <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
-                <ul>
-                  {LoginLinks.map((data) => (
-                    <li key={data.id}>
-                      <a
-                        href={data.link}
-                        className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
-                      >
-                        {data.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-            <div className="group relative cursor-pointer">
-              <Button
-                type="link"
-                className="text-black dark:text-white font-medium hover:text-black"
-                onClick={handleClick}
-              >
-                Đăng xuất
-              </Button>
-            </div>
           </ul>
         </div>
       </div>
