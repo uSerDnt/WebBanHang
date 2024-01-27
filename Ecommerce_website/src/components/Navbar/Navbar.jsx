@@ -5,14 +5,17 @@ import {
   ShoppingCartOutlined,
   CaretDownOutlined,
 } from "@ant-design/icons";
-import { Button, Typography, Input } from "antd";
+import { Button, Typography, Input, Image } from "antd";
 import DarkMode from "./DarkMode";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../FirebaseConfig";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signOut } from "firebase/auth";
+import { useSelector, useDispatch } from "react-redux";
+import actions from "../../redux/actions";
+import Dummy from "../../assets/dummy.jpeg";
 const Menu = [
   {
     id: 122,
@@ -77,32 +80,23 @@ const Navbar = ({ handleLoginModal }) => {
     //   link: "/#",
     // },
   ];
-  const [user, setUser] = useState("");
-  const getUser = auth.onAuthStateChanged((authUser) => {
-    if (authUser) {
-      setUser(authUser);
-    } else {
-      setUser(null);
-    }
-  });
-  useEffect(() => {
-    getUser();
-  }, []);
-  console.log("user", user);
+  const { currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const handleClick = async () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        console.log("Signed out successfully");
+        toast.success("Đăng xuất thành công");
+        dispatch(actions.AuthActions.CurrentUser(null));
       })
       .catch((error) => {
-        // An error happened.
+        toast.error("Có gì đó sai sai");
       });
   };
   const navigate = useNavigate();
   const handleClickGoToProfilePage = () => {
     navigate("/profile");
   };
+  console.log("currentUser", currentUser);
   return (
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20">
       {/* upper Navbar */}
@@ -143,21 +137,46 @@ const Navbar = ({ handleLoginModal }) => {
             <div>
               <DarkMode />
             </div>
-            {/* thong tin user */}
-            <Button type="link" onClick={handleClickGoToProfilePage}>
-              Hello {user?.displayName ? user?.displayName : user?.email}
-            </Button>
+
             {/* Login */}
-            {user ? (
-              <div className="group relative cursor-pointer">
-                <Button
-                  type="link"
-                  className="text-black dark:text-white font-medium hover:text-black"
-                  onClick={handleClick}
-                >
-                  Đăng xuất
-                </Button>
-              </div>
+            {currentUser ? (
+              <>
+                {/* thong tin user */}
+                <div className="flex items-center">
+                  <Typography className="text-base dark:text-white">
+                    {" "}
+                    Hello
+                  </Typography>
+                  <Button
+                    type="link"
+                    onClick={handleClickGoToProfilePage}
+                    className="text-black text-base flex flex-row"
+                  >
+                    <Image
+                      className="rounded-full justify-between"
+                      height={25}
+                      preview={false}
+                      src={
+                        currentUser?.photoURL ? currentUser?.photoURL : Dummy
+                      }
+                    />
+                    <Typography className="ml-1">
+                      {currentUser?.displayName
+                        ? currentUser?.displayName
+                        : currentUser?.email}
+                    </Typography>
+                  </Button>
+                </div>
+                <div className="group relative cursor-pointer">
+                  <Button
+                    type="link"
+                    className="text-black dark:text-white font-medium hover:text-black"
+                    onClick={handleClick}
+                  >
+                    Đăng xuất
+                  </Button>
+                </div>
+              </>
             ) : (
               <div className="group relative cursor-pointer">
                 <a href="#" className="flex items-center gap-[2px] py-2">
