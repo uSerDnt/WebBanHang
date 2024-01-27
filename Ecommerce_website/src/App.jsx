@@ -4,6 +4,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 const App = () => {
   useEffect(() => {
     AOS.init({
@@ -15,10 +18,12 @@ const App = () => {
     AOS.refresh();
   }, []);
   return (
-    <div>
-      <AppRoute />;
-      <ToastContainer />
-    </div>
+    <Provider store={store}>
+      <div>
+        <AppRoute />;
+        <ToastContainer />
+      </div>
+    </Provider>
   );
 };
 

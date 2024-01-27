@@ -99,7 +99,10 @@ const Navbar = ({ handleLoginModal }) => {
         // An error happened.
       });
   };
-
+  const navigate = useNavigate();
+  const handleClickGoToProfilePage = () => {
+    navigate("/profile");
+  };
   return (
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20">
       {/* upper Navbar */}
@@ -141,9 +144,9 @@ const Navbar = ({ handleLoginModal }) => {
               <DarkMode />
             </div>
             {/* thong tin user */}
-            <div>
+            <Button type="link" onClick={handleClickGoToProfilePage}>
               Hello {user?.displayName ? user?.displayName : user?.email}
-            </div>
+            </Button>
             {/* Login */}
             {user ? (
               <div className="group relative cursor-pointer">

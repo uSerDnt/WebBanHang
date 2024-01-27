@@ -13,6 +13,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, Input, Checkbox, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import actions from "../../redux/actions";
+
 const colors = {
   primary: "#e06666",
   background: "#f5f5f5",
@@ -23,7 +26,7 @@ const Login = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [login, setLogin] = useState(true);
-
+  const dispatch = useDispatch();
   const handleLogin = async (values) => {
     try {
       const { username, password, repassword } = values;
