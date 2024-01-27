@@ -5,7 +5,7 @@ import {
   ShoppingCartOutlined,
   CaretDownOutlined,
 } from "@ant-design/icons";
-import { Button, Typography, Input, Image } from "antd";
+import { Button, Typography, Input, Image, Modal } from "antd";
 import DarkMode from "./DarkMode";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -105,7 +105,7 @@ const Navbar = ({ handleLoginModal }) => {
           <div>
             <a href="#" className="font-bold text-2xl sm:text-3xl flex gap-2">
               <img src={Logo} alt="Logo" className="w-10" />
-              Shopify
+              Shopping now - Quần áo tết ở đây
             </a>
           </div>
           {/* search bar */}
