@@ -14,7 +14,8 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import actions from "../../redux/actions";
 import FACEBOOK_ICON from "../../assets/facebook.jpg";
-
+import loginImg from "../../assets/login.jpg"
+import GOOGLE_ICON from "../../assets/google.png"
 const colors = {
   primary: "#e06666",
   background: "#f5f5f5",
