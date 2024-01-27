@@ -78,21 +78,15 @@ const Navbar = ({ handleLoginModal }) => {
     // },
   ];
   const [user, setUser] = useState("");
+  const getUser = auth.onAuthStateChanged((authUser) => {
+    if (authUser) {
+      setUser(authUser);
+    } else {
+      setUser(null);
+    }
+  });
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        // User is logged in
-        setUser(authUser);
-      } else {
-        // User is logged out
-        setUser(null);
-      }
-    });
-
-    return () => {
-      // Cleanup the subscription when the component unmounts
-      unsubscribe();
-    };
+    getUser();
   }, []);
   console.log("user", user);
   const handleClick = async () => {
