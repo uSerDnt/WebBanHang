@@ -4,6 +4,7 @@ import { message } from "antd";
 const LoginModal = ({ handleLoginModal, openLoginModal }) => {
   const handleOrderNow = () => {
     message.success("Dzô! Đặt hàng thành công", 5);
+    handleLoginModal();
   };
   return (
     <>
