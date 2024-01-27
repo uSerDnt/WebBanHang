@@ -80,6 +80,7 @@ const Navbar = ({ handleLoginModal }) => {
     //   link: "/#",
     // },
   ];
+
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const handleClick = async () => {
@@ -98,17 +99,19 @@ const Navbar = ({ handleLoginModal }) => {
   };
   console.log("currentUser", currentUser);
   return (
-    <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20">
+    <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20 min-w-[100%]">
       {/* upper Navbar */}
       <div className="bg-primary/40 py-2">
         <div className="container flex justify-between items-center ">
-          <div>
+          <div className="flex items-center ">
             <a
-              href="#"
+              href="/"
               className="font-semibold text-2xl sm:text-3xl flex gap-2"
             >
               <img src={Logo} alt="Logo" className="w-10" />
-              Shopping now - Nơi phong cách gặp sự tự tin
+              <Typography className="items-center text-2xl">
+                Shopping now
+              </Typography>
             </a>
           </div>
           {/* search bar */}
@@ -128,9 +131,6 @@ const Navbar = ({ handleLoginModal }) => {
               onClick={handleLoginModal}
               className="bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-white  py-1 px-4 rounded-full flex items-center gap-3 group"
             >
-              <Typography className="group-hover:block hidden transition-all duration-200">
-                Order
-              </Typography>
               <ShoppingCartOutlined
                 className=" text-white drop-shadow-sm cursor-pointer"
                 style={{ fontSize: "20px" }}

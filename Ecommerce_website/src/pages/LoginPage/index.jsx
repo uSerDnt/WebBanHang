@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../FirebaseConfig';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../FirebaseConfig";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -11,17 +11,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, Input, Checkbox, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import actions from "../../redux/actions";
 import FACEBOOK_ICON from "../../assets/facebook.jpg";
-import loginImg from "../../assets/login.jpg"
-import GOOGLE_ICON from "../../assets/google.png"
+import loginImg from "../../assets/login.jpg";
+import GOOGLE_ICON from "../../assets/google.png";
 const colors = {
   primary: "#e06666",
   background: "#f5f5f5",
   disabled: "#d9d9d9",
 };
-
 
 const Login = () => {
   const [form] = Form.useForm();
@@ -37,15 +34,17 @@ const Login = () => {
           return;
         }
         await createUserWithEmailAndPassword(auth, email, password);
-        toast.success('Registration successful!');
+        toast.success("Registration successful!");
         setIsRegistering(false);
       } else {
         await signInWithEmailAndPassword(auth, email, password);
-        toast.success('Login successful!');
-        navigate('/');
+        toast.success("Login successful!");
+        navigate("/");
       }
     } catch (error) {
-      toast.error(`Failed to ${isRegistering ? 'register' : 'login'}: ${error.message}`);
+      toast.error(
+        `Failed to ${isRegistering ? "register" : "login"}: ${error.message}`,
+      );
     }
   };
 
@@ -53,8 +52,8 @@ const Login = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      navigate('/');
-      toast.success('Google Sign-In Successful');
+      navigate("/");
+      toast.success("Google Sign-In Successful");
     } catch (error) {
       toast.error(`Google Sign-In Error: ${error.message}`);
     }
@@ -62,7 +61,7 @@ const Login = () => {
 
   return (
     <div className="w-full h-screen flex items-start">
-       <div className="relative w-1/2 h-full flex flex-col">
+      <div className="relative w-1/2 h-full flex flex-col">
         <div className="absolute top-[20%] left-[10%] flex flex-col">
           <h1 className="text-4xl text-white font-bold my-4">
             Turn Your Ideas into reality
@@ -74,94 +73,117 @@ const Login = () => {
         <img src={loginImg} className="w-full h-full object-cover" />
       </div>
 
-
-
       <div className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-20 justify-between items-center">
         <h1 className="w-full max-w-[500px] mx-auto text-xl text-[#060606] font-semibold mr-auto">
           Interactive Brand
         </h1>
-        
+
         <div className="w-full flex flex-col max-w-[500px]">
           <div className="w-full flex flex-col mb-2">
-            <h3 className="text-3xl font-semibold mb-2">{isRegistering ? 'Đăng Ký' : 'Đăng Nhập'}</h3>
+            <h3 className="text-3xl font-semibold mb-2">
+              {isRegistering ? "Đăng Ký" : "Đăng Nhập"}
+            </h3>
             <p className="text-base mb-2">
-            Chào mừng trở lại! Vui lòng nhập thông tin của bạn.
+              Chào mừng trở lại! Vui lòng nhập thông tin của bạn.
             </p>
           </div>
           <Form form={form} onFinish={handleAuth} layout="vertical">
-          <Form.Item
-            name="email"
-            rules={[{ required: true, message: 'Please input your email!' }]}
-          >
-            <Input prefix={<UserOutlined />} placeholder="Email" />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
-          >
-            <Input.Password prefix={<LockOutlined />} placeholder="Password" />
-          </Form.Item>
-
-          {isRegistering && (
             <Form.Item
-              name="confirmPassword"
-              dependencies={['password']}
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
+              <Input prefix={<UserOutlined />} placeholder="Email" />
+            </Form.Item>
+
+            <Form.Item
+              name="password"
               rules={[
-                { required: true, message: 'Please confirm your password!' },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue('password') === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                  },
-                }),
+                { required: true, message: "Please input your password!" },
               ]}
             >
-              <Input.Password placeholder="Confirm Password" />
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Password"
+              />
             </Form.Item>
-          )}
 
-          {!isRegistering && (
+            {isRegistering && (
+              <Form.Item
+                name="confirmPassword"
+                dependencies={["password"]}
+                rules={[
+                  { required: true, message: "Please confirm your password!" },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          "The two passwords that you entered do not match!",
+                        ),
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password placeholder="Confirm Password" />
+              </Form.Item>
+            )}
+
+            {!isRegistering && (
+              <Form.Item>
+                <Checkbox>Remember me</Checkbox>
+                <a className="float-right">Forgot password?</a>
+              </Form.Item>
+            )}
+
             <Form.Item>
-              <Checkbox>Remember me</Checkbox>
-              <a className="float-right">Forgot password?</a>
-            </Form.Item>
-          )}
-
-          <Form.Item>
-            <Button type="primary" htmlType="default"  className="h-full w-full text-[#060606] my font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer hover:bg-primary">
-              {isRegistering ? 'Register' : 'Login'}
-            </Button>
-          </Form.Item>
-
-          {!isRegistering && (
-            <Form.Item>
-              <Button onClick={handleGoogleSignIn} className="h-full w-full text-[#060606] my font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer">
-                <img src={GOOGLE_ICON} alt="Google" className="h-6 mr-2" />
-                Đăng nhập bằng Google
+              <Button
+                type="primary"
+                htmlType="default"
+                className="h-full w-full text-[#060606] my font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer hover:bg-primary"
+              >
+                {isRegistering ? "Register" : "Login"}
               </Button>
             </Form.Item>
-          )}
-          {!isRegistering && (
+
+            {!isRegistering && (
+              <Form.Item>
+                <Button
+                  onClick={handleGoogleSignIn}
+                  className="h-full w-full text-[#060606] my font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer"
+                >
+                  <img src={GOOGLE_ICON} alt="Google" className="h-6 mr-2" />
+                  Đăng nhập bằng Google
+                </Button>
+              </Form.Item>
+            )}
+            {!isRegistering && (
+              <Form.Item>
+                <Button
+                  onClick={handleGoogleSignIn}
+                  className="h-full w-full text-[#060606] my font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer"
+                >
+                  <img src={FACEBOOK_ICON} alt="Google" className="h-6 mr-2" />
+                  Đăng nhập bằng Google
+                </Button>
+              </Form.Item>
+            )}
+
             <Form.Item>
-              <Button onClick={handleGoogleSignIn} className="h-full w-full text-[#060606] my font-semibold bg-white border border-black/40 rounded-md p-4 text-center flex items-center justify-center cursor-pointer">
-                <img src={FACEBOOK_ICON} alt="Google" className="h-6 mr-2" />
-                Đăng nhập bằng Google
+              <Button
+                type="link"
+                onClick={() => setIsRegistering(!isRegistering)}
+              >
+                {isRegistering
+                  ? "Bạn đã có tài khoản? Đăng Nhập"
+                  : "Bạn chưa có tài khoản? Đăng Ký"}
               </Button>
             </Form.Item>
-          )}
+          </Form>
+        </div>
 
-          <Form.Item>
-            <Button type="link" onClick={() => setIsRegistering(!isRegistering)}>
-              {isRegistering ? 'Bạn đã có tài khoản? Đăng Nhập' : "Bạn chưa có tài khoản? Đăng Ký"}
-            </Button>
-          </Form.Item>
-        </Form>
-          </div>
-
-       
         <ToastContainer position="top-center" />
       </div>
     </div>
@@ -169,7 +191,6 @@ const Login = () => {
 };
 
 export default Login;
-
 
 // import loginImg from "../../assets/login.jpg";
 // import GOOGLE_ICON from "../../assets/google.png";
