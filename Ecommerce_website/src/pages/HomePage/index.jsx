@@ -17,7 +17,7 @@ const HomePages = () => {
 
   return (
     <div>
-      <Navbar handleLoginModal={handleLoginModal} />
+      {/* <Navbar handleLoginModal={handleLoginModal} /> */}
       <Hero handleLoginModal={handleLoginModal} />
       <ListProduct />
       <TopProducts />
@@ -25,7 +25,7 @@ const HomePages = () => {
       <Subscribe />
       <ListProduct />
       <Testimonials />
-      <Footer />
+      {/* <Footer /> */}
       <LoginModal
         handleLoginModal={handleLoginModal}
         openLoginModal={openLoginModal}

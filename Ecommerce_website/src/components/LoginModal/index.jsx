@@ -1,7 +1,10 @@
 import React from "react";
 import { IoCloseOutline } from "react-icons/io5";
-
+import { message } from "antd";
 const LoginModal = ({ handleLoginModal, openLoginModal }) => {
+  const handleOrderNow = () => {
+    message.success("Dzô! Đặt hàng thành công", 5);
+  };
   return (
     <>
       {openLoginModal && (
@@ -38,7 +41,10 @@ const LoginModal = ({ handleLoginModal, openLoginModal }) => {
                   className=" w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4"
                 />
                 <div className="flex justify-center">
-                  <button className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full ">
+                  <button
+                    onClick={handleOrderNow}
+                    className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full "
+                  >
                     Order Now
                   </button>
                 </div>

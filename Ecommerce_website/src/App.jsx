@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AppRoute from "./AppRoute";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -6,7 +6,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer";
+import { ConfigProvider } from "antd";
+import AlertShoppe from "./components/AlertShoppe";
 const App = () => {
   useEffect(() => {
     AOS.init({
@@ -17,12 +20,21 @@ const App = () => {
     });
     AOS.refresh();
   }, []);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const handleLoginModal = () => {
+    setOpenLoginModal(!openLoginModal);
+  };
   return (
     <Provider store={store}>
-      <div>
-        <AppRoute />;
-        <ToastContainer />
-      </div>
+      <ConfigProvider>
+        <div>
+          <Navbar handleLoginModal={handleLoginModal} />
+          <AlertShoppe />
+          <AppRoute />;
+          <ToastContainer />
+          <Footer />
+        </div>
+      </ConfigProvider>
     </Provider>
   );
 };
