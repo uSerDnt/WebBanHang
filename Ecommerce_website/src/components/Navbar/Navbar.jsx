@@ -20,12 +20,12 @@ const Menu = [
   {
     id: 122,
     name: "Trang chủ",
-    link: "/#",
+    link: "/",
   },
   {
     id: 333,
-    name: "Được đánh giá cao nhất",
-    link: "/#services",
+    name: "Sale 50% hôm nay",
+    link: "/",
   },
   {
     id: 7,
@@ -39,7 +39,7 @@ const Menu = [
   },
   {
     id: 749649,
-    name: "điện tử",
+    name: "Trang phục nữ",
     link: "/#",
   },
 ];
@@ -47,17 +47,17 @@ const Menu = [
 const DropdownLinks = [
   {
     id: 1,
-    name: "Sản phẩm thịnh hành",
+    name: "Thời trang tết",
     link: "/#",
   },
   {
     id: 2,
-    name: "Bán chạy nhất",
+    name: "Giày - dép",
     link: "/#",
   },
   {
     id: 3,
-    name: "Được đánh giá cao nhất",
+    name: "Phụ kiện chất",
     link: "/#",
   },
 ];
@@ -103,9 +103,12 @@ const Navbar = ({ handleLoginModal }) => {
       <div className="bg-primary/40 py-2">
         <div className="container flex justify-between items-center ">
           <div>
-            <a href="#" className="font-bold text-2xl sm:text-3xl flex gap-2">
+            <a
+              href="#"
+              className="font-semibold text-2xl sm:text-3xl flex gap-2"
+            >
               <img src={Logo} alt="Logo" className="w-10" />
-              Shopping now - Quần áo tết ở đây
+              Shopping now - Nơi phong cách gặp sự tự tin
             </a>
           </div>
           {/* search bar */}
@@ -211,7 +214,7 @@ const Navbar = ({ handleLoginModal }) => {
               <li key={item.id}>
                 <a
                   href={item.link}
-                  className="inline-block px-4 hover:text-primary duration-200"
+                  className="inline-block px-4 hover:text-primary duration-200 font-semibold"
                 >
                   {item.name}
                 </a>
@@ -219,8 +222,11 @@ const Navbar = ({ handleLoginModal }) => {
             ))}
             {/* Simple Dropdown and Links */}
             <li className="group relative cursor-pointer">
-              <a href="#" className="flex items-center gap-[2px] py-2">
-                Sản phẩm thịnh hành
+              <a
+                href="#"
+                className="flex items-center gap-[2px] py-2 font-semibold hover:text-primary"
+              >
+                Đại hạ giá chỉ từ 100k
                 <span>
                   <CaretDownOutlined className="transition-all duration-200 group-hover:rotate-180" />
                 </span>
@@ -231,7 +237,7 @@ const Navbar = ({ handleLoginModal }) => {
                     <li key={data.id}>
                       <a
                         href={data.link}
-                        className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
+                        className="inline-block w-full rounded-md p-2 hover:bg-primary/20 font-semibold"
                       >
                         {data.name}
                       </a>
