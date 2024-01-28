@@ -4,7 +4,7 @@ import { Alert } from "antd";
 
 const AlertShoppe = () => {
   const messages = [
-    "Tự tin bước ra thế giới với [Shopoify] - Nơi phong cách gặp sự tự tin",
+    "Tự tin bước ra thế giới với Shopping Now - Nơi phong cách gặp sự tự tin",
     "Giảm giá khi mua trực tiếp tại cửa hàng hôm nay",
     "Tết tới rồi - sắm quần áo mới thôi nào",
   ];

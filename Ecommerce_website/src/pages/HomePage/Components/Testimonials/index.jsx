@@ -79,7 +79,7 @@ const Testimonials = () => {
           Lời chứng thực
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-          Dễ dàng, Tự tin, Phong cách - Trải nghiệm thời trang tuyệt vời tại [Shopoify]
+          Dễ dàng, Tự tin, Phong cách - Trải nghiệm thời trang tuyệt vời tại Shopping Now
           </p>
         </div>
 

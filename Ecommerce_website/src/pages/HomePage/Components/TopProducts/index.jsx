@@ -38,7 +38,7 @@ const TopProducts = () => {
             Sản phẩm top trending ở đây
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-            Shop Shopoify luôn cung cấp những sản phẩm thời trang hot nhất. Hãy lựa
+            Shop Shopping Now luôn cung cấp những sản phẩm thời trang hot nhất. Hãy lựa
             chọn theo phong cách của bạn
           </p>
         </div>
