@@ -1,29 +1,41 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
 import womenImage from "../../assets/women2.jpg";
-import Footer from "../../components/Footer/index";
 
-const colorOptions = ["#3498db", "#e74c3c", "#2ecc71", "white", "black"];
 const sizeOptions = ["S", "M", "L", "XL"];
+
+const QuantitySelector = ({ value, onIncrease, onDecrease }) => {
+  return (
+    <div className="flex items-center">
+      <button
+        onClick={onDecrease}
+        className="bg-primary text-white font-bold py-2 px-4 rounded-l"
+      >
+        -
+      </button>
+      <input
+        type="text"
+        value={value}
+        readOnly
+        className="w-12 border-t border-b border-gray-300 py-2 px-3 text-center text-sm"
+      />
+      <button
+        onClick={onIncrease}
+        className="bg-primary text-white font-bold py-2 px-4 rounded-r"
+      >
+        +
+      </button>
+    </div>
+  );
+};
 
 const ProductDetail = () => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState(colorOptions[0]);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0]);
 
   const handleLoginModal = () => {
     setOpenLoginModal(!openLoginModal);
-  };
-
-  const handleQuantityChange = (event) => {
-    const newQuantity = Math.max(1, Math.floor(Number(event.target.value)));
-    setQuantity(newQuantity);
-  };
-
-  const handleColorClick = (color) => {
-    setSelectedColor(color);
   };
 
   const handleSizeClick = (size) => {
@@ -35,28 +47,33 @@ const ProductDetail = () => {
     console.log("Buy Now clicked!");
   };
 
+  const navigateToProductDetail = (productId) => {
+    // Handle navigation to the product detail page with the specified productId
+    console.log(`Navigating to product detail page for productId: ${productId}`);
+  };
+
   const similarProducts = [
     {
       id: 1,
-      title: "Similar Product 1",
+      title: "Ảnh tương tự 1",
       image: womenImage,
       price: 59.99,
     },
     {
       id: 2,
-      title: "Similar Product 2",
+      title: "Ảnh tương tự 2",
       image: womenImage,
       price: 64.99,
     },
     {
       id: 3,
-      title: "Similar Product 3",
+      title: "Ảnh tương tự 3",
       image: womenImage,
       price: 74.99,
     },
     {
       id: 4,
-      title: "Similar Product 4",
+      title: "Ảnh tương tự 4",
       image: womenImage,
       price: 89.99,
     },
@@ -73,12 +90,11 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <Navbar handleLoginModal={handleLoginModal} />
       <div className="bg-white rounded-lg shadow-lg">
         <div className="flex">
           <div className="w-1/3 pl-4 flex items-center justify-center mt-4 mb-4">
             <img
-              className="w-full h-auto object-cover rounded-l-lg"
+              className="w-full h-auto object-cover rounded-l-lg rounded-r-lg"
               src={womenImage}
               alt="Product"
             />
@@ -97,7 +113,7 @@ const ProductDetail = () => {
                   <button
                     key={size}
                     onClick={() => handleSizeClick(size)}
-                    className={`text-sm py-2 px-4 border ${selectedSize === size ? 'border-blue-500' : 'border-gray-300'} rounded`}
+                    className={`text-sm py-2 px-4 border ${selectedSize === size ? 'border-primary text-white bg-primary' : 'border-gray-300 text-gray-700'} rounded`}
                   >
                     {size}
                   </button>
@@ -108,40 +124,18 @@ const ProductDetail = () => {
             {/* Quantity Input */}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">Số lượng:</label>
-              <input
-                type="number"
+              <QuantitySelector
                 value={quantity}
-                onChange={handleQuantityChange}
-                className="w-16 border rounded-md py-2 px-3 text-sm"
+                onIncrease={() => setQuantity(quantity + 1)}
+                onDecrease={() => setQuantity(Math.max(1, quantity - 1))}
               />
-            </div>
-
-            {/* Color Options */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Màu sắc:</label>
-              <div className="flex space-x-4">
-                {colorOptions.map((color) => (
-                  <button
-                    key={color}
-                    onClick={() => handleColorClick(color)}
-                    style={{
-                      backgroundColor: color,
-                      width: '30px',
-                      height: '30px',
-                      borderRadius: '5px',
-                      border: selectedColor === color ? '2px solid #3498db' : '2px solid #ccc',
-                      boxShadow: selectedColor === color ? '0 0 5px #3498db' : 'none',
-                    }}
-                  />
-                ))}
-              </div>
             </div>
 
             {/* Product Details */}
             <div className="mb-4">
               <h3 className="text-lg font-bold mb-2">Chi tiết sản phẩm</h3>
               <p className="text-gray-700">
-                <strong>Xuất xứ:</strong> {productDetails.brand}
+                <strong>Thương hiệu:</strong> {productDetails.brand}
               </p>
               <p className="text-gray-700">
                 <strong>Chất liệu:</strong> {productDetails.material}
@@ -154,12 +148,12 @@ const ProductDetail = () => {
             {/* Buy Now and Add to Cart Buttons */}
             <div className="mt-8 space-x-2">
               {/* Buy Now Button */}
-              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-2" onClick={handleBuyNow}>
+              <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded mx-2" onClick={handleBuyNow}>
                 <span className="hover:text-black">Mua ngay</span>
               </button>
 
               {/* Add to Cart Button */}
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">
                 <Link to="/cart" className="hover:text-black">Thêm vào giỏ hàng</Link>
               </button>
             </div>
@@ -169,27 +163,25 @@ const ProductDetail = () => {
 
       {/* Similar Products Section */}
       <div className="mt-8">
-        <h3 className="text-2xl font-bold mb-4">Sản phẩm tương tự</h3>
+        <h3 className="text-2xl font-bold mb-4 ml-4">Sản phẩm tương tự</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {similarProducts.map((product) => (
             <div key={product.id} className="bg-white rounded-lg shadow-lg p-4">
-              <img
-                className="w-full h-auto object-cover mb-4"
-                src={product.image}
-                alt={product.title}
-              />
+              <Link to={`/product/${product.id}`} onClick={() => navigateToProductDetail(product.id)}>
+                <img
+                  className="w-full h-auto object-cover rounded-lg mb-4 cursor-pointer"
+                  src={product.image}
+                  alt={product.title}
+                />
+              </Link>
               <h4 className="text-lg font-bold">{product.title}</h4>
               <p className="text-gray-700">${product.price}</p>
-              <Link to={`/product/${product.id}`} className="text-blue-500 hover:underline">
-                Xem sản phẩm
-              </Link>
             </div>
           ))}
         </div>
       </div>
 
       {/* Add the Footer component at the end */}
-      <Footer />
     </div>
   );
 };

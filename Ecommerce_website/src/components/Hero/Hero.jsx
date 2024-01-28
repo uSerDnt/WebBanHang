@@ -10,21 +10,21 @@ const ImageList = [
     img: Image1,
     title: "Giảm tới 50% tất cả trang phục nam",
     description:
-      "Thời trang là cách diễn đạt chính mình - Tạo nên phong cách của bạn tại [Shopoify]",
+      "Thời trang là cách diễn đạt chính mình - Tạo nên phong cách của bạn tại Shopping Now",
   },
   {
     id: 2,
     img: Image2,
     title: "Giảm giá 30% cho tất cả trang phục nữ",
     description:
-      "Chọn lựa thông minh, mặc đẹp mỗi ngày - [tên shop], phong cách không giới hạn.",
+      "Chọn lựa thông minh, mặc đẹp mỗi ngày - Shopping Now, phong cách không giới hạn.",
   },
   {
     id: 3,
     img: Image3,
     title: "Giảm giá 70% cho tất cả sản phẩm giảm giá",
     description:
-      "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Shopping Now: Nâng tầm phong cách, dẫn đầu xu hướng mua sắm hiện đại.",
   },
 ];
 

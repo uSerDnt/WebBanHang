@@ -46,10 +46,10 @@ const Footer = () => {
           <div className="py-8 px-4">
             <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
               <img src={footerLogo} alt="" className="max-w-[50px]" />
-              Shopoify
+              Shopping Now
             </h1>
             <p>
-            Tự tin bước ra thế giới với [Shopoify] - Nơi phong cách gặp sự tự tin.
+            Tự tin bước ra thế giới với Shopping Now - Nơi phong cách gặp sự tự tin.
             </p>
           </div>
 

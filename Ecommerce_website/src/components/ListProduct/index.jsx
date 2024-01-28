@@ -91,7 +91,7 @@ const ListProduct = () => {
             Các sản phẩm
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-            Thấu hiểu phong cách cá nhân tại [Shopoify] - Đẳng cấp và Sáng tạo.
+            Thấu hiểu phong cách cá nhân tại Shopping Now - Đẳng cấp và Sáng tạo.
           </p>
         </div>
         {/* Body section */}
