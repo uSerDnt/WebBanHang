@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import womenImage from "../../assets/women2.jpg";
 
 const sizeOptions = ["S", "M", "L", "XL"];
@@ -11,7 +11,8 @@ const QuantitySelector = ({ value, onIncrease, onDecrease }) => {
         onClick={onDecrease}
         className="bg-primary text-white font-bold py-2 px-4 rounded-l"
       >
-        -
+        {" "}
+        -{" "}
       </button>
       <input
         type="text"
@@ -23,7 +24,8 @@ const QuantitySelector = ({ value, onIncrease, onDecrease }) => {
         onClick={onIncrease}
         className="bg-primary text-white font-bold py-2 px-4 rounded-r"
       >
-        +
+        {" "}
+        +{" "}
       </button>
     </div>
   );
@@ -43,12 +45,10 @@ const ProductDetail = () => {
   };
 
   const handleBuyNow = () => {
-    // Handle logic for "Buy Now" button click, e.g., redirect to checkout page or trigger purchase process
     console.log("Buy Now clicked!");
   };
 
   const navigateToProductDetail = (productId) => {
-    // Handle navigation to the product detail page with the specified productId
     console.log(`Navigating to product detail page for productId: ${productId}`);
   };
 
@@ -81,7 +81,8 @@ const ProductDetail = () => {
 
   const productDetails = {
     title: "Áo Sweater Dệt Kim Cao Cấp",
-    description: "Áo Sweater Dệt Kim Cao Cấp Thiết Kế Rách Phong Cách Retro Mỹ Thời Trang Thu Đông Cho Nam Giới",
+    description:
+      "Áo Sweater Dệt Kim Cao Cấp Thiết Kế Rách Phong Cách Retro Mỹ Thời Trang Thu Đông Cho Nam Giới",
     price: 99.99,
     brand: "Fashion Brand",
     material: "Chất liệu cao cấp",
@@ -102,18 +103,24 @@ const ProductDetail = () => {
           <div className="w-2/3 p-6">
             <h2 className="text-2xl font-bold mb-4">{productDetails.title}</h2>
 
-            {/* Product Description */}
+            {/* Mô tả Sản phẩm */}
             <p className="text-gray-700 mb-4">{productDetails.description}</p>
 
-            {/* Size Options */}
+            {/* Tùy chọn kích thước */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Size:</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Size:
+              </label>
               <div className="flex space-x-4">
                 {sizeOptions.map((size) => (
                   <button
                     key={size}
                     onClick={() => handleSizeClick(size)}
-                    className={`text-sm py-2 px-4 border ${selectedSize === size ? 'border-primary text-white bg-primary' : 'border-gray-300 text-gray-700'} rounded`}
+                    className={`text-sm py-2 px-4 border ${
+                      selectedSize === size
+                        ? "border-primary text-white bg-primary"
+                        : "border-gray-300 text-gray-700"
+                    } rounded`}
                   >
                     {size}
                   </button>
@@ -121,9 +128,11 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Quantity Input */}
+            {/* Số lượng */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Số lượng:</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Số lượng:
+              </label>
               <QuantitySelector
                 value={quantity}
                 onIncrease={() => setQuantity(quantity + 1)}
@@ -131,7 +140,7 @@ const ProductDetail = () => {
               />
             </div>
 
-            {/* Product Details */}
+            {/* Thông tin chi tiết sản phẩm */}
             <div className="mb-4">
               <h3 className="text-lg font-bold mb-2">Chi tiết sản phẩm</h3>
               <p className="text-gray-700">
@@ -141,47 +150,62 @@ const ProductDetail = () => {
                 <strong>Chất liệu:</strong> {productDetails.material}
               </p>
               <p className="text-gray-700">
-                <strong>Cách bảo quản:</strong> {productDetails.careInstructions}
+                <strong>Cách bảo quản:</strong>{" "}
+                {productDetails.careInstructions}
               </p>
             </div>
 
-            {/* Buy Now and Add to Cart Buttons */}
+            {/* Giá sản phẩm */}
+            <div className="mb-4">
+              <p className="text-lg font-bold text-gray-700">Giá:</p>
+              <p className="text-xl font-bold text-black">
+                ${productDetails.price}
+              </p>
+            </div>
+
+            {/* Nút Mua ngay và thêm vào giỏ hàng */}
             <div className="mt-8 space-x-2">
-              {/* Buy Now Button */}
-              <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded mx-2" onClick={handleBuyNow}>
+              {/* Mua ngay */}
+              <button
+                className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded mx-2"
+                onClick={handleBuyNow}
+              >
                 <span className="hover:text-black">Mua ngay</span>
               </button>
 
-              {/* Add to Cart Button */}
+              {/* thêm vào giỏ hàng */}
               <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">
-                <Link to="/cart" className="hover:text-black">Thêm vào giỏ hàng</Link>
+                <Link to="/cart" className="hover:text-black">
+                  Thêm vào giỏ hàng
+                </Link>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Similar Products Section */}
+      {/* Sản phẩm khác */}
       <div className="mt-8">
         <h3 className="text-2xl font-bold mb-4 ml-4">Sản phẩm tương tự</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {similarProducts.map((product) => (
             <div key={product.id} className="bg-white rounded-lg shadow-lg p-4">
-              <Link to={`/product/${product.id}`} onClick={() => navigateToProductDetail(product.id)}>
+              <Link
+                to={`/product/${product.id}`}
+                onClick={() => navigateToProductDetail(product.id)}
+              >
                 <img
                   className="w-full h-auto object-cover rounded-lg mb-4 cursor-pointer"
                   src={product.image}
                   alt={product.title}
                 />
               </Link>
-              <h4 className="text-lg font-bold">{product.title}</h4>
+              <h1 className="text-lg font-bold">{product.title}</h1>
               <p className="text-gray-700">${product.price}</p>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Add the Footer component at the end */}
     </div>
   );
 };
