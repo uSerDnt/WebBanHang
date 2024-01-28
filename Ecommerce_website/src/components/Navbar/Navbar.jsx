@@ -101,18 +101,23 @@ const Navbar = ({ handleLoginModal }) => {
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20 min-w-[100%]">
       {/* upper Navbar */}
       <div className="bg-primary/40 py-2">
-        <div className="container flex justify-between items-center ">
-          <div className="flex items-center ">
+        <div className="container flex justify-between items-center flex-shrink-0">
+          <div className="flex items-center">
             <a
               href="/"
-              className="font-semibold text-2xl sm:text-3xl flex gap-2"
+              className="font-semibold text-2xl sm:text-xl flex items-center gap-2"
             >
-              <img src={Logo} alt="Logo" className="w-10" />
-              <Typography className="items-center text-2xl">
-                Shopping now
-              </Typography>
+              <Image
+                preview={false}
+                width={40}
+                src={Logo}
+                alt="Logo"
+                className="w-10"
+              />
+              <span className="hidden sm:inline">Shopping now</span>
             </a>
           </div>
+
           {/* search bar */}
           <div className="flex justify-between items-center gap-4">
             <div className="flex justify-between items-center gap-4">
@@ -145,17 +150,14 @@ const Navbar = ({ handleLoginModal }) => {
               <>
                 {/* thong tin user */}
                 <div className="flex items-center">
-                  <Typography className="text-base dark:text-white">
-                    {" "}
-                    Hello
-                  </Typography>
+                  <span className="hidden sm:inline"> Hello</span>
                   <Button
                     type="link"
                     onClick={handleClickGoToProfilePage}
                     className="text-black text-base flex flex-row"
                   >
                     <Image
-                      className="rounded-full justify-between"
+                      className="rounded-full justify-between min-w-5 min-h-5"
                       height={25}
                       preview={false}
                       src={
@@ -169,7 +171,7 @@ const Navbar = ({ handleLoginModal }) => {
                     </Typography>
                   </Button>
                 </div>
-                <div className="group relative cursor-pointer">
+                <div className="group relative cursor-pointer hidden sm:inline">
                   <Button
                     type="link"
                     className="text-black dark:text-white font-medium hover:text-black"

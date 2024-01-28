@@ -18,7 +18,7 @@ const DarkMode = () => {
   }, [theme]);
 
   return (
-    <div className="relative">
+    <div className="relative hidden sm:inline">
       <img
         src={LightButton}
         alt=""
