@@ -1,84 +1,38 @@
 import React, { useEffect, useState } from "react";
-import Img1 from "../../assets/women.png";
-import Img2 from "../../assets/women2.jpg";
-import Img3 from "../../assets/women3.jpg";
-import Img4 from "../../assets/women4.jpg";
 import { StarFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../../../FirebaseConfig";
-const ProductsData = [
-  {
-    id: 1,
-    img: Img1,
-    title: "Phụ nữ dân tộc",
-    rating: 5.0,
-    color: "Trắng",
-    aosDelay: "0",
-  },
-  {
-    id: 2,
-    img: Img2,
-    title: "phụ nữ phương Tây",
-    rating: 4.5,
-    color: "Đỏ",
-    aosDelay: "200",
-  },
-  {
-    id: 3,
-    img: Img3,
-    title: "Kính bảo hộ",
-    rating: 4.7,
-    color: "nâu",
-    aosDelay: "400",
-  },
-  {
-    id: 4,
-    img: Img4,
-    title: "Áo thun in",
-    rating: 4.4,
-    color: "Vàng",
-    aosDelay: "600",
-  },
-  {
-    id: 5,
-    img: Img2,
-    title: "Áo thun thời trang",
-    rating: 4.5,
-    color: "Hồng",
-    aosDelay: "800",
-  },
-];
 
-const ListProduct = () => {
+const ListProduct = ({ ProductsData }) => {
   const navigate = useNavigate();
-  const handleProductDetail = () => {
-    navigate("/product");
+  const handleProductDetail = (id) => {
+    navigate(`/product/${id}`);
   };
+
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        // Get a snapshot of the "products" collection
-        const querySnapshot = await getDocs(collection(firestore, "Products"));
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       // Get a snapshot of the "products" collection
+  //       const querySnapshot = await getDocs(collection(firestore, "Products"));
 
-        // Extract product data from the snapshot
-        const productsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+  //       // Extract product data from the snapshot
+  //       const productsData = querySnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }));
 
-        setProducts(productsData);
-      } catch (error) {
-        console.error("Error fetching products: ", error);
-      }
-    };
+  //       setProducts(productsData);
+  //     } catch (error) {
+  //       console.error("Error fetching products: ", error);
+  //     }
+  //   };
 
-    // Fetch products when the component mounts
-    fetchProducts();
-  }, []);
-  console.log("products", products);
+  //   // Fetch products when the component mounts
+  //   fetchProducts();
+  // }, []);
   return (
     <div className="mt-14 mb-12">
       <div className="container">
@@ -91,21 +45,22 @@ const ListProduct = () => {
             Các sản phẩm
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-            Thấu hiểu phong cách cá nhân tại Shopping Now - Đẳng cấp và Sáng tạo.
+            Thấu hiểu phong cách cá nhân tại Shopping Now - Đẳng cấp và Sáng
+            tạo.
           </p>
         </div>
         {/* Body section */}
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5">
             {/* card section */}
-            {ProductsData.map((data) => (
+            {ProductsData?.map((data) => (
               <div
                 data-aos="fade-up"
                 data-aos-delay={data.aosDelay}
                 key={data.id}
                 className="space-y-3"
               >
-                <button onClick={handleProductDetail}>
+                <button onClick={() => handleProductDetail(data.id)}>
                   <img
                     src={data.img}
                     alt=""

@@ -8,7 +8,6 @@ const CurrentUser = (payload) => {
   };
 };
 
-// Exporting an object with CurrentUser as a property
 export default {
   CurrentUser,
 };

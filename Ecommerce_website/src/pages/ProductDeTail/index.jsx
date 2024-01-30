@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import womenImage from "../../assets/women2.jpg";
+import { useSelector, useDispatch } from "react-redux";
 
 const sizeOptions = ["S", "M", "L", "XL"];
 
@@ -32,6 +33,18 @@ const QuantitySelector = ({ value, onIncrease, onDecrease }) => {
 };
 
 const ProductDetail = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { listProducts } = useSelector((state) => state.listProducts);
+  console.log("listProducts", listProducts);
+  console.log("id", id);
+
+  useEffect(() => {
+    if (listProducts && id) {
+      const filterProduct = listProducts?.find((item) => item?.id === id);
+      console.log("filterProduct", filterProduct);
+    }
+  }, []);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0]);
@@ -49,7 +62,9 @@ const ProductDetail = () => {
   };
 
   const navigateToProductDetail = (productId) => {
-    console.log(`Navigating to product detail page for productId: ${productId}`);
+    console.log(
+      `Navigating to product detail page for productId: ${productId}`,
+    );
   };
 
   const similarProducts = [
@@ -86,7 +101,8 @@ const ProductDetail = () => {
     price: 99.99,
     brand: "Fashion Brand",
     material: "Chất liệu cao cấp",
-    careInstructions: "Giặt tay, không sử dụng chất tẩy rửa mạnh, là ở nhiệt độ thấp",
+    careInstructions:
+      "Giặt tay, không sử dụng chất tẩy rửa mạnh, là ở nhiệt độ thấp",
   };
 
   return (
