@@ -9,6 +9,7 @@ import Testimonials from "./Components/Testimonials";
 import Footer from "../../components/Footer";
 import LoginModal from "../../components/LoginModal";
 import { useSelector } from "react-redux";
+import GoogleMap from "../../components/GoogleMap";
 const HomePages = () => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const handleLoginModal = () => {
@@ -25,6 +26,7 @@ const HomePages = () => {
       <Subscribe />
       {/* <ListProduct /> */}
       <Testimonials />
+      <GoogleMap />
       {/* <Footer /> */}
       <LoginModal
         handleLoginModal={handleLoginModal}

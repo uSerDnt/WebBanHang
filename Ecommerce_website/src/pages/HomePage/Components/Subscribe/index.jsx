@@ -1,11 +1,12 @@
 import React from "react";
 import Banner from "../../../../assets/orange-pattern.jpg";
+import SendEmail from "../../../../components/SendMail";
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
-  height: "100%",
+  height: "450px",
   width: "100%",
 };
 const Subscribe = () => {
@@ -18,14 +19,15 @@ const Subscribe = () => {
       <div className="container backdrop-blur-sm py-10">
         <div className="space-y-6 max-w-xl mx-auto">
           <h1 className="text-2xl !text-center sm:text-left sm:text-4xl font-semibold">
-          Nhận thông báo về sản phẩm mới
+            Liên hệ với chúng tôi
           </h1>
-          <input
+          <SendEmail />
+          {/* <input
             data-aos="fade-up"
             type="text"
             placeholder="Nhập email của bạn"
             className="w-full p-3 text-black"
-          />
+          /> */}
         </div>
       </div>
     </div>

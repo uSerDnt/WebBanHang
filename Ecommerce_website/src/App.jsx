@@ -10,6 +10,8 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
 import { ConfigProvider } from "antd";
 import AlertShoppe from "./components/AlertShoppe";
+import ScrollToTop from "react-scroll-to-top";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 const App = () => {
   useEffect(() => {
     AOS.init({
@@ -27,6 +29,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <ConfigProvider>
+        <ScrollToTop smooth top="20" width="40" />
+          <MessengerCustomerChat
+            pageId="103913405106091"
+            appId="7135345683246178"
+          />
         <Navbar handleLoginModal={handleLoginModal} />
         <AlertShoppe />
         <AppRoute />;
