@@ -8,7 +8,8 @@ import {
   FaLocationArrow,
   FaMobileAlt,
 } from "react-icons/fa";
-
+import { MdEmail } from "react-icons/md";
+import { SiZalo } from "react-icons/si";
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
   backgroundPosition: "bottom",
@@ -22,18 +23,17 @@ const FooterLinks = [
   {
     title: "Trang chủ",
     link: "/#",
+    icon: "",
   },
   {
-    title: "About",
+    title: "Facebook",
     link: "/#about",
+    icon: <FaFacebook />,
   },
   {
-    title: "Liên hệ",
+    title: "Zalo",
     link: "/#contact",
-  },
-  {
-    title: "Blog",
-    link: "/#blog",
+    icon: <SiZalo />,
   },
 ];
 
@@ -49,7 +49,8 @@ const Footer = () => {
               Shopping Now
             </h1>
             <p>
-            Tự tin bước ra thế giới với Shopping Now - Nơi phong cách gặp sự tự tin.
+              Tự tin bước ra thế giới với Shopping Now - Nơi phong cách gặp sự
+              tự tin.
             </p>
           </div>
 
@@ -58,24 +59,7 @@ const Footer = () => {
             <div>
               <div className="py-8 px-4">
                 <h1 className="sm:text-xl text-xl font-bold sm:text-left text-justify mb-3">
-                Liên kết quan trọng
-                </h1>
-                <ul className="flex flex-col gap-3">
-                  {FooterLinks.map((link) => (
-                    <li
-                      className="cursor-pointer hover:text-primary hover:translate-x-1 duration-300 text-gray-200"
-                      key={link.title}
-                    >
-                      <span>{link.title}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div>
-              <div className="py-8 px-4">
-                <h1 className="sm:text-xl text-xl font-bold sm:text-left text-justify mb-3">
-                  Liên kết
+                  Liên kết quan trọng
                 </h1>
                 <ul className="flex flex-col gap-3">
                   {FooterLinks.map((link) => (
@@ -93,25 +77,23 @@ const Footer = () => {
             {/* social links */}
 
             <div>
-              <div className="flex items-center gap-3 mt-6">
-                <a href="#">
-                  <FaInstagram className="text-3xl" />
-                </a>
-                <a href="#">
-                  <FaFacebook className="text-3xl" />
-                </a>
-                <a href="#">
-                  <FaLinkedin className="text-3xl" />
-                </a>
-              </div>
+              <div className="flex items-center gap-3 mt-3"></div>
               <div className="mt-6">
                 <div className="flex items-center gap-3">
-                  <FaLocationArrow />
-                  <p>Noida, Uttar Pradesh</p>
+                  <MdEmail />
+                  <p>trong.doanngoc2023@gmail.com</p>
                 </div>
+
                 <div className="flex items-center gap-3 mt-3">
                   <FaMobileAlt />
-                  <p>+91 123456789</p>
+                  <p>+84335764560</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <FaLocationArrow style={{ width: 40 }} />
+                  <p>
+                    250/15 Nguyễn Thượng Hiền, Phường 5, Phú Nhuận, Thành phố Hồ
+                    Chí Minh Chỉ đường
+                  </p>
                 </div>
               </div>
             </div>

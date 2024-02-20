@@ -10,6 +10,7 @@ import Footer from "../../components/Footer";
 import LoginModal from "../../components/LoginModal";
 import { useSelector } from "react-redux";
 import GoogleMap from "../../components/GoogleMap";
+import FanPage from "../../components/FanPage";
 const HomePages = () => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const handleLoginModal = () => {
@@ -26,7 +27,10 @@ const HomePages = () => {
       <Subscribe />
       {/* <ListProduct /> */}
       <Testimonials />
-      <GoogleMap />
+      <div className="flex flex-row justify-center">
+        <GoogleMap />
+        <FanPage />
+      </div>
       {/* <Footer /> */}
       <LoginModal
         handleLoginModal={handleLoginModal}
