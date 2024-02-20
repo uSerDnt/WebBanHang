@@ -36,13 +36,12 @@ const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { listProducts } = useSelector((state) => state.listProducts);
-  console.log("listProducts", listProducts);
-  console.log("id", id);
-
+  const [productDetail, setProductDetail] = useState({});
+  console.log("product", productDetail);
   useEffect(() => {
     if (listProducts && id) {
       const filterProduct = listProducts?.find((item) => item?.id === id);
-      console.log("filterProduct", filterProduct);
+      setProductDetail(filterProduct);
     }
   }, []);
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -112,12 +111,12 @@ const ProductDetail = () => {
           <div className="w-1/3 pl-4 flex items-center justify-center mt-4 mb-4">
             <img
               className="w-full h-auto object-cover rounded-l-lg rounded-r-lg"
-              src={womenImage}
+              src={productDetail?.img}
               alt="Product"
             />
           </div>
           <div className="w-2/3 p-6">
-            <h2 className="text-2xl font-bold mb-4">{productDetails.title}</h2>
+            <h2 className="text-2xl font-bold mb-4">{productDetail?.title}</h2>
 
             {/* Mô tả Sản phẩm */}
             <p className="text-gray-700 mb-4">{productDetails.description}</p>

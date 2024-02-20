@@ -27,13 +27,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <ConfigProvider>
-        <div>
-          <Navbar handleLoginModal={handleLoginModal} />
-          <AlertShoppe />
-          <AppRoute />;
-          <ToastContainer />
-          <Footer />
-        </div>
+        <Navbar handleLoginModal={handleLoginModal} />
+        <AlertShoppe />
+        <AppRoute />;
+        <ToastContainer />
+        <Footer />
       </ConfigProvider>
     </Provider>
   );
