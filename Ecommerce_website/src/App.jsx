@@ -30,7 +30,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <ConfigProvider>
-        <ScrollToTop smooth top="20" width="40" />
+        <ScrollToTop smooth top="20" width="40" style={{ marginBottom: 200 }} />
         <Navbar handleLoginModal={handleLoginModal} />
         <AlertShoppe />
         <AppRoute />;
