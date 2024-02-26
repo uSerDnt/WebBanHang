@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, firestore } from "../../../FirebaseConfig";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
@@ -17,6 +17,7 @@ import loginImg from "../../assets/login.jpg";
 import GOOGLE_ICON from "../../assets/google.png";
 import { useDispatch } from "react-redux";
 import actions from "../../redux/actions";
+import myContext from "./../../context/data/myContext";
 const colors = {
   primary: "#e06666",
   background: "#f5f5f5",
@@ -28,6 +29,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [isRegistering, setIsRegistering] = useState(false);
   const dispatch = useDispatch();
+  const context = useContext(myContext);
+  const { user } = context;
 
   const handleAuth = async (values) => {
     const { email, password, confirmPassword } = values;
@@ -40,45 +43,84 @@ const Login = () => {
         const users = await createUserWithEmailAndPassword(
           auth,
           email,
-          password
+          password,
         );
-        const user = {
-          uid: users.user.uid,
-          email: users.user.email,
-          time: Timestamp.now(),
-        };
-        const userRef = collection(firestore, "users");
-        await addDoc(userRef, user);
-        toast.success("Registration successful!");
-        setIsRegistering(false);
+        const checkExistUser = users.some(
+          (currentUser) => currentUser.uid === user.uid,
+        );
+
+        if (checkExistUser) {
+          toast.success("Đăng ký thành công!");
+          setIsRegistering(false);
+        } else {
+          const user = {
+            uid: users.user.uid,
+            email: users.user.email,
+            name: users?.user?.displayName,
+            avatar: users?.user?.photoURL,
+            time: Timestamp.now(),
+          };
+          const userRef = collection(firestore, "users");
+          await addDoc(userRef, user);
+          toast.success("Đăng ký thành công!");
+          setIsRegistering(false);
+        }
       } else {
         const users = await signInWithEmailAndPassword(auth, email, password);
-        const user = {
-          uid: users.user.uid,
-          email: users.user.email,
-          time: Timestamp.now(),
-        };
-        dispatch(actions.AuthActions.CurrentUser(user));
-        const userRef = collection(firestore, "users");
-        await addDoc(userRef, user);
-        toast.success("Login successful!");
-        navigate("/");
+
+        const checkExistUser = users.some(
+          (currentUser) => currentUser.uid === user.uid,
+        );
+
+        console.log("check", checkExistUser);
+        if (checkExistUser) {
+          toast.success("Đăng nhập thành công!");
+          navigate("/");
+        } else {
+          const user = {
+            uid: users.user.uid,
+            email: users.user.email,
+            name: users?.user?.displayName,
+            avatar: users?.user?.photoURL,
+            time: Timestamp.now(),
+          };
+          const userRef = collection(firestore, "users");
+          await addDoc(userRef, user);
+          toast.success("Đăng nhập thành công!");
+          navigate("/");
+        }
       }
     } catch (error) {
-      toast.error(
-        `Failed to ${isRegistering ? "register" : "login"}: ${error.message}`
-      );
+      toast.error("Lỗi đăng nhập, vui lòng đăng nhập lại");
     }
   };
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
-      navigate("/");
-      toast.success("Google Sign-In Successful");
+      const user = await signInWithPopup(auth, provider);
+      const checkExistUser = user.includes(
+        (user) => user.uid === user.user.uid,
+      );
+      if (checkExistUser) {
+        navigate("/");
+        toast.success("Đăng nhập bằng Google thành công");
+      } else {
+        const userSocial = {
+          uid: user.user.uid,
+          email: user.user.email,
+          name: user.user.displayName,
+          avatar: user.user.photoURL,
+          time: Timestamp.now(),
+        };
+        const userRef = collection(firestore, "users");
+        await addDoc(userRef, userSocial);
+        navigate("/");
+        toast.success("Đăng nhập bằng Google thành công");
+      }
     } catch (error) {
-      toast.error(`Google Sign-In Error: ${error.message}`);
+      toast.error(`Đăng nhập Google thất bại, vui lòng thử lại`);
+      console.log("err", error);
     }
   };
 
@@ -132,8 +174,8 @@ const Login = () => {
                       }
                       return Promise.reject(
                         new Error(
-                          "The two passwords that you entered do not match!"
-                        )
+                          "The two passwords that you entered do not match!",
+                        ),
                       );
                     },
                   }),

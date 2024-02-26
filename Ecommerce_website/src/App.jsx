@@ -28,6 +28,10 @@ const App = () => {
   const handleLoginModal = () => {
     setOpenLoginModal(!openLoginModal);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Provider store={store}>
       <MyState>

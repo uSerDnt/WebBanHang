@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import ProductDeTail from "../pages/ProductDeTail";
 import HomePages from "../pages/HomePage";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Login from "../pages/LoginPage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +14,12 @@ import Img2 from "../assets/women2.jpg";
 import Img3 from "../assets/women3.jpg";
 import Img4 from "../assets/women4.jpg";
 import AllProduct from "../pages/AllProduct";
+import myContext from "../context/data/myContext";
+import { Layout, Image, message } from "antd";
+import SideMenu from "../components/SideMenu";
+import AppRouteAdmin from "../AppRouteAdmin";
+const { Sider, Content, Footer } = Layout;
+
 const ProductsData = [
   {
     id: "123",
@@ -58,9 +64,17 @@ const ProductsData = [
 ];
 const AppRoute = () => {
   const dispatch = useDispatch();
+  const context = useContext(myContext);
+  const { user } = context;
+  const [isAdmin, setIsAdmin] = useState(false);
   const getUser = auth.onAuthStateChanged((authUser) => {
     if (authUser) {
-      dispatch(actions.AuthActions.CurrentUser(authUser));
+      const currentUser = user?.filter((user) => user?.uid === authUser?.uid);
+      dispatch(actions.AuthActions.CurrentUser(currentUser[0]));
+      console.log("currentUser", currentUser[0]);
+      if (currentUser[0]?.isAdmin == true) {
+        setIsAdmin(true);
+      }
     }
   });
   const getProduct = () => {
@@ -71,14 +85,33 @@ const AppRoute = () => {
     getUser();
     getProduct();
   }, []);
+  console.log("isAdmin", isAdmin);
   return (
-    <Routes>
-      <Route path="/" element={<HomePages />} />
-      <Route path="/product/:id" element={<ProductDeTail />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/allproduct" element={<AllProduct />} />
-    </Routes>
+    <>
+      {isAdmin ? (
+        <Layout>
+          <Sider style={{ height: "100vh", backgroundColor: "white" }}>
+            <SideMenu />
+          </Sider>
+          <Layout>
+            <Content style={{ backgroundColor: "white" }}>
+              <AppRouteAdmin />
+            </Content>
+            <Footer style={{ textAlign: "center" }}>
+              trong.doanngoc2023@gmail.com
+            </Footer>
+          </Layout>
+        </Layout>
+      ) : (
+        <Routes>
+          <Route path="/" element={<HomePages />} />
+          <Route path="/product/:id" element={<ProductDeTail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/allproduct" element={<AllProduct />} />
+        </Routes>
+      )}
+    </>
   );
 };
 

@@ -91,6 +91,7 @@ const Navbar = ({ handleLoginModal }) => {
     setFilterType,
     filterPrice,
     setFilterPrice,
+    user,
   } = context;
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -98,7 +99,7 @@ const Navbar = ({ handleLoginModal }) => {
 
   const handleSearch = () => {
     const filteredProducts = product.filter((product) =>
-      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      product.title.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setSearchResults(filteredProducts);
     setIsModalVisible(true);
@@ -207,7 +208,7 @@ const Navbar = ({ handleLoginModal }) => {
               <>
                 {/* thong tin user */}
                 <div className="flex items-center">
-                  <span className="hidden sm:inline"> Hello</span>
+                  <span className="hidden sm:inline">Xin chào</span>
                   <Button
                     type="link"
                     onClick={handleClickGoToProfilePage}
@@ -217,13 +218,11 @@ const Navbar = ({ handleLoginModal }) => {
                       className="rounded-full justify-between min-w-5 min-h-5"
                       height={25}
                       preview={false}
-                      src={
-                        currentUser?.photoURL ? currentUser?.photoURL : Dummy
-                      }
+                      src={currentUser?.avatar ? currentUser?.avatar : Dummy}
                     />
                     <Typography className="ml-1">
-                      {currentUser?.displayName
-                        ? currentUser?.displayName
+                      {currentUser?.name
+                        ? currentUser?.name
                         : currentUser?.email}
                     </Typography>
                   </Button>
