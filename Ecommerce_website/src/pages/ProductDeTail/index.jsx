@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import womenImage from "../../assets/women2.jpg";
 import { useSelector, useDispatch } from "react-redux";
-
+import myContext from "../../context/data/myContext";
+import { firestore } from "../../../FirebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 const sizeOptions = ["S", "M", "L", "XL"];
 
 const QuantitySelector = ({ value, onIncrease, onDecrease }) => {
@@ -35,15 +37,7 @@ const QuantitySelector = ({ value, onIncrease, onDecrease }) => {
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { listProducts } = useSelector((state) => state.listProducts);
-  const [productDetail, setProductDetail] = useState({});
-  console.log("product", productDetail);
-  useEffect(() => {
-    if (listProducts && id) {
-      const filterProduct = listProducts?.find((item) => item?.id === id);
-      setProductDetail(filterProduct);
-    }
-  }, []);
+
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(sizeOptions[0]);
@@ -62,10 +56,27 @@ const ProductDetail = () => {
 
   const navigateToProductDetail = (productId) => {
     console.log(
-      `Navigating to product detail page for productId: ${productId}`,
+      `Navigating to product detail page for productId: ${productId}`
     );
   };
+  //state cóntext
+  const context = useContext(myContext);
+  const [products, setProducts] = useState("");
+  const getProductData = async () => {
+    try {
+      const productTemp = await getDoc(doc(firestore, "products", id));
+      // console.log(productTemp)
+      setProducts(productTemp.data());
+      // console.log(productTemp.data())
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    getProductData();
+  }, []);
+  console.log("products1111", products);
   const similarProducts = [
     {
       id: 1,
@@ -111,15 +122,15 @@ const ProductDetail = () => {
           <div className="w-1/3 pl-4 flex items-center justify-center mt-4 mb-4">
             <img
               className="w-full h-auto object-cover rounded-l-lg rounded-r-lg"
-              src={productDetail?.img}
+              src={products?.imageUrl}
               alt="Product"
             />
           </div>
           <div className="w-2/3 p-6">
-            <h2 className="text-2xl font-bold mb-4">{productDetail?.title}</h2>
+            <h2 className="text-2xl font-bold mb-4">{products?.title}</h2>
 
             {/* Mô tả Sản phẩm */}
-            <p className="text-gray-700 mb-4">{productDetails.description}</p>
+            <p className="text-gray-700 mb-4">{products.description}</p>
 
             {/* Tùy chọn kích thước */}
             <div className="mb-4">

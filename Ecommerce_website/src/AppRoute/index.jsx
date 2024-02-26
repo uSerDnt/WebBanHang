@@ -13,6 +13,7 @@ import Img1 from "../assets/women.png";
 import Img2 from "../assets/women2.jpg";
 import Img3 from "../assets/women3.jpg";
 import Img4 from "../assets/women4.jpg";
+import AllProduct from "../pages/AllProduct";
 const ProductsData = [
   {
     id: "123",
@@ -76,6 +77,7 @@ const AppRoute = () => {
       <Route path="/product/:id" element={<ProductDeTail />} />
       <Route path="/login" element={<Login />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/allproduct" element={<AllProduct />} />
     </Routes>
   );
 };

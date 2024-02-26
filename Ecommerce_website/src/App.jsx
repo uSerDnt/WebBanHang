@@ -13,6 +13,7 @@ import AlertShoppe from "./components/AlertShoppe";
 import ScrollToTop from "react-scroll-to-top";
 import MessengerCustomerChat from "react-messenger-customer-chat";
 import FaceBookMsg from "./components/FacebookMsg";
+import MyState from "./context/data/myState";
 const App = () => {
   useEffect(() => {
     AOS.init({
@@ -29,15 +30,22 @@ const App = () => {
   };
   return (
     <Provider store={store}>
-      <ConfigProvider>
-        <ScrollToTop smooth top="20" width="40" style={{ marginBottom: 200 }} />
-        <Navbar handleLoginModal={handleLoginModal} />
-        <AlertShoppe />
-        <AppRoute />;
-        <ToastContainer />
-        <Footer />
-        <FaceBookMsg />
-      </ConfigProvider>
+      <MyState>
+        <ConfigProvider>
+          <ScrollToTop
+            smooth
+            top="20"
+            width="40"
+            style={{ marginBottom: 200 }}
+          />
+          <Navbar handleLoginModal={handleLoginModal} />
+          <AlertShoppe />
+          <AppRoute />;
+          <ToastContainer />
+          <Footer />
+          <FaceBookMsg />
+        </ConfigProvider>
+      </MyState>
     </Provider>
   );
 };

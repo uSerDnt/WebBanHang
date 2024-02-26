@@ -9,6 +9,9 @@ const ListProduct = ({ ProductsData }) => {
   const handleProductDetail = (id) => {
     navigate(`/product/${id}`);
   };
+  const handleAddProduct = () => {
+    navigate(`/allproduct`);
+  };
 
   const [products, setProducts] = useState([]);
 
@@ -81,7 +84,10 @@ const ListProduct = ({ ProductsData }) => {
           </div>
           {/* view all button */}
           <div className="flex justify-center">
-            <button className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md">
+            <button
+              onClick={handleAddProduct}
+              className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md"
+            >
               Xem Tất Cả
             </button>
           </div>

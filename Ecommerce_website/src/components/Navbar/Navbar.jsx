@@ -5,10 +5,10 @@ import {
   ShoppingCartOutlined,
   CaretDownOutlined,
 } from "@ant-design/icons";
-import { Button, Typography, Input, Image, Modal } from "antd";
+import { Button, Typography, Input, Image, Modal, Divider } from "antd";
 import DarkMode from "./DarkMode";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../FirebaseConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +16,7 @@ import { signOut } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import actions from "../../redux/actions";
 import Dummy from "../../assets/dummy.jpeg";
+import myContext from "../../context/data/myContext";
 const Menu = [
   {
     id: 122,
@@ -63,24 +64,6 @@ const DropdownLinks = [
 ];
 
 const Navbar = ({ handleLoginModal }) => {
-  const LoginLinks = [
-    {
-      id: 1,
-      name: "Đăng nhập",
-      link: "/login",
-    },
-    {
-      id: 2,
-      name: "Đăng ký",
-      link: "/#",
-    },
-    // {
-    //   id: 3,
-    //   name: "Đăng xuất",
-    //   link: "/#",
-    // },
-  ];
-
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const handleClick = async () => {
@@ -96,6 +79,38 @@ const Navbar = ({ handleLoginModal }) => {
   const navigate = useNavigate();
   const handleClickGoToProfilePage = () => {
     navigate("/profile");
+  };
+  //search
+  const context = useContext(myContext);
+  const {
+    mode,
+    product,
+    searchkey,
+    setSearchkey,
+    filterType,
+    setFilterType,
+    filterPrice,
+    setFilterPrice,
+  } = context;
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleSearch = () => {
+    const filteredProducts = product.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(filteredProducts);
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
   return (
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-20 min-w-[100%]">
@@ -120,15 +135,57 @@ const Navbar = ({ handleLoginModal }) => {
 
           {/* search bar */}
           <div className="flex justify-between items-center gap-4">
-            <div className="flex justify-between items-center gap-4">
+            <div className="flex justify-between items-center gap-4 ">
               <div className="relative group hidden sm:block">
                 <Input
+                  onKeyPress={handleKeyPress}
                   type="text"
                   placeholder="Tìm kiếm"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-[200px] sm:w-[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary hover:border-primary, dark:border-gray-500 , dark:bg-gray-800 "
                 />
-                <SearchOutlined className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3" />
+                <SearchOutlined
+                  className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3"
+                  onClick={handleSearch}
+                />
               </div>
+              <Modal
+                title={
+                  <span style={{ fontSize: "30px", fontStyle: "bold" }}>
+                    Kết quả tìm kiếm
+                  </span>
+                }
+                visible={isModalVisible}
+                onCancel={handleCancel}
+                footer={null}
+              >
+                <ul>
+                  {searchResults.map((product) => (
+                    <li
+                      key={product.id}
+                      className="justify-center items-center font-semibold text-xl "
+                    >
+                      <Link
+                        to={`/product/${product.id}`}
+                        onClick={
+                          (() => setIsModalVisible(false), location.reload)
+                        }
+                        relative="path"
+                        className="flex items-center text-2xl"
+                      >
+                        <img
+                          src={product.imageUrl}
+                          alt={product.title}
+                          style={{ marginRight: 8, width: 100, height: 100 }}
+                        />
+                        {product.title}
+                      </Link>
+                      <Divider />
+                    </li>
+                  ))}
+                </ul>
+              </Modal>
             </div>
             {/* order button */}
             <Button
@@ -183,26 +240,15 @@ const Navbar = ({ handleLoginModal }) => {
               </>
             ) : (
               <div className="group relative cursor-pointer">
-                <a href="#" className="flex items-center gap-[2px] py-2">
+                <a
+                  href="#"
+                  className="flex items-center gap-[2px] py-2 font-semibold text-base"
+                  onClick={() => {
+                    navigate(`/login`);
+                  }}
+                >
                   Đăng nhập
-                  <span>
-                    <CaretDownOutlined className="transition-all duration-200 group-hover:rotate-180" />
-                  </span>
                 </a>
-                <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
-                  <ul>
-                    {LoginLinks?.map((data) => (
-                      <li key={data.id}>
-                        <a
-                          href={data.link}
-                          className="inline-block w-full rounded-md p-2 hover:bg-primary/20 "
-                        >
-                          {data.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
             )}
           </div>

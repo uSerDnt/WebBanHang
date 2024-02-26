@@ -46,7 +46,7 @@ const SendEmail = () => {
           method="POST"
         >
           <Form.Item
-            label="User Name"
+            label="Tên của bạn"
             name="userName"
             rules={[
               {
@@ -91,7 +91,7 @@ const SendEmail = () => {
               htmlType="submit"
               className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full "
             >
-              Submit
+              Gửi
             </Button>
           </Form.Item>
         </Form>
