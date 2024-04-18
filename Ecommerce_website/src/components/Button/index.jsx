@@ -35,7 +35,7 @@ const CoreButton = ({
  size = "small",
  ...props
 }) => {
- const _renderIcon = useCallback(() => {
+ const _renderIcon = useMemo(() => {
   switch (typeIcon) {
    case "plus":
     return <PlusCircle size={20} />;
