@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mui/material": "^5.15.15",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@phosphor-icons/react": "^2.1.4",
     "@redux-devtools/extension": "^3.3.0",
     "antd": "^5.13.2",
     "aos": "^2.3.4",
@@ -28,7 +31,8 @@
     "redux": "^5.0.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^3.1.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
