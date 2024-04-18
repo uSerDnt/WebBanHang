@@ -1,8 +1,27 @@
 import React, { useCallback } from "react";
 import { Button } from "@mui/material";
 import { styled } from "@mui/system";
-import { Link } from "react-router-dom";
 import { PlusCircle, Trash } from "@phosphor-icons/react";
+
+/**
+ * @typedef {'text' | 'link' | 'contained' | 'outlined'} ButtonType
+ * @typedef {'small' | 'medium' | 'large'} SizeType
+ */
+
+/**
+ * @param {{
+ *   children: React.ReactNode,
+ *   title: string,
+ *   href: string,
+ *   className: string,
+ *   onClick: () => void,
+ *   type: ButtonType,
+ *   typeIcon: string,
+ *   color: string,
+ *   size: SizeType,
+ *   props: any
+ * }} props
+ */
 
 const CoreButton = ({
  children,

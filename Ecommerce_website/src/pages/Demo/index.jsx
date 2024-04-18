@@ -7,13 +7,21 @@ const Demo = () => {
   <div className="container row flex flex-1">
    <div className="flex-1">
     <div className="h-8" />
-    <ButtonCore typeIcon={"plus"}>Thêm mới</ButtonCore>
+    <ButtonCore
+     typeIcon={"plus"}
+     type="text"
+     onClick={() => {
+      console.log("click");
+     }}
+    >
+     Thêm mới
+    </ButtonCore>
     <div className="h-8" />
     <ButtonCore size="medium" startIcon={<Trash size={20} />}>
      Thêm mới
     </ButtonCore>
     <div className="h-8" />
-    <ButtonCore size="large" disabled>
+    <ButtonCore size="medium" disabled>
      Thêm mới
     </ButtonCore>
 
